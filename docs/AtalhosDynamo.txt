@@ -1,0 +1,98 @@
+- Criar nota : CTRL + W
+- Fixar nota a um node : 
+  - Selecionar o Node, 
+  - Pressionar a tecla SHIFT, 
+  - Selecionar a nota, 
+  - Soltar a tecla SHIFT
+  - Clicar com o botão direito do mouse sobre a nota
+    - Selecionar a opção "Fixar ao nó"
+
+  - Ou :
+    - Selecionar uma região retangular da tela Começando a partir
+      da parte inferior direita e subindo em direção a esquerda :
+      - Clicar com o boão esquerdo do mouse e mantê-lo pressionado
+      - Arrastar o mouse para cima e à esquerda do ponto inicial marcado
+        - Surgirá um retângulo tracejado marcando a região de seleção
+      - Arrastar o mouse até encostar no node e nota para que ambos
+        fiquem total ou parcialmente interceptados pelo retângulo
+        tracejado (Esta condiçao indica seleção dos dois elementos)
+      - Soltar o botão esquerdo do mouse para indicar fim do processo
+        de seleção da região desejada
+      - Clicar com o botão direito do mouse sobre a nota
+        - Selecionar a opção "Fixar ao nó" do menu suspenso que Surgirá
+          - A nota será fixada acima do node e um símbolo de trava
+            será inserido no seu canto inferior esquerdo para indicar 
+            que a mesma está ancorada ao node
+          - Agora, ao movimentar o node de posição, a nota acompanha
+            o mesmso permanecendo acima do mesmo
+
+- Criar um grupo de nós:
+  - Clicar com o botão esquerdo do mouse em uma area inicial
+  - Arrastar o mouse para a esquerda ou direita de modo a criar uma área quadrada de seleção que abranja os nodes (nós) a serem incluidos no grupo
+  - Soltar o botão esquerdo do mouse ao final da seleção da área desejada
+  - Clicar com o botão direito do mouse em um local vazio da area de trabalho do dynamo
+    - Selecionar "Criar Grupo" no menu suspenso com o botao esquerdo do mouse
+  - Dar "dois cliques" com o botão esquerdo do mouse sobre o título para alterar o seu conteúdo
+  - Clicar com o botão direito do mouse dentro da área de um grupo e escolher : 
+    - Uma cor adequada para o retângulo do grupo
+    - O Tamanho da fonte do texto do título do grupo
+  
+- Desfazer uma ação anterior (Criar grupo, Criar nota, etc): CTRL + Z
+
+- Criar um nó de bloco de código (Code Block) :
+  - Dois cliques com o botão esquerdo do mouse em uma area em branco da janela do dynamo : Cria um nó de código (Code Block)
+
+- Criar um nó de bloco de código em Python:
+  - Clicar com o botão direiro em uma área em branco no editor
+  - Digitar Ptyhon Script no campo de busca do menu suspendo que será aberto
+
+- Selecionar um nó na janela de edição visual de nós do Dynamo:
+   Clicar com o botão direito do mouse e digitar as iniciais do nó desejado no campo de pesquisa (lupa)
+
+- Copiar um nó da area de design
+  - Clicar no nó para selecionar
+    - Digitar CTRL+C para copiar, CTRL+V para colar uma cópia do nó original
+  ou
+  - Clicar no nó com o botão esquerdo do mouse para selecionar e manter pressionado o botão.
+    - Digitar CTRL, arrastar o nó selecionado para um local diferente e soltar CTRL e o botão esquerdo do mouse para criar uma cópia do nó original
+
+
+- Criar um bloco de códigos a partir da seleção de vários nós
+  - Selecionar uma área com o botão esquerdo do mouse que inclua varios nós
+  - Clicar com o botão direito do mouse em uma área em branco após a seleção
+    - Seleciopnar a opção "Nó para code"
+
+- Símbolos dos nós do dynamo:
+  - Raio : ação a ser executada
+  - Mais : criação de algum objeto
+  - Interrogação : consulta de informação
+
+- Obter sugestão de nós de entradas em inputs
+  Clicar duas vezes com o botao esquerd do mouse sobre um input. O Revit irá sugerir Nós para serem conmectados no mesmo
+  Facilita obter o nó necessário em um input quando não sabemos qual usar
+
+
+- Estrategias de geração de scripts Dynamo:
+  - abrir o sitre chatGPT.com
+  - Solicitar orientações para realizar alguma rotina em dynamo Revit no campo de perguntas :
+    - Você pode me ajudar a criar uma rotina em dynamo revit 2024 ?
+    - Descrevar a rotina desejada após esta resposta para que o ChatGPT possa responder 
+    - Solicitar para criar um script após solicitar a rotina desejada para sofisticar mais as respostas
+    - Solicitar a criação de scripts em python para realizar rotinas mais complexas também para obter caminhos a serem seguidos na implementação de rotinas pretendidas
+
+- Referências para consultas
+  - Ao abrir o dynamo, abrir os exemplos básicos no canto inferior direito da tela, Amostras.
+    Tem exemplos simples mas interessantes para ajudar a compreender os fundamentos da Dynamo e dos nós básicos
+
+  - Perguntas : 
+    - Fórum de discussão : https://forum.dynamobim.com/
+    - Site do Dynamo : https://dynamobim.org/
+    - Site do ChatGPT : ht5tps://chatgpt.com
+
+  - Referências :
+    - Dynamo Primer : https://primer2.dynamobim.org/
+    - Tutoriais em vídeo : https://dynamobim.org/#161
+    - Dicionário do Dynamo : https://dictionary.dynamobim.com/2/#/
+
+
+  
