@@ -1,0 +1,345 @@
+{
+  "Uuid": "04feae54-9d0d-4e46-b486-f1987bd8c621",
+  "IsCustomNode": false,
+  "Description": "Apaga arquivos de backup rvt e rfa recursivamente a partir do diretório informado",
+  "Name": "Delete_backups_rvt_rfa",
+  "ElementResolver": {
+    "ResolutionMap": {}
+  },
+  "Inputs": [
+    {
+      "Id": "af48dfd6cb9540c5be0198576b6d1e7c",
+      "Name": "2. Confirma exclusão dos backups ?",
+      "Type": "boolean",
+      "Type2": "boolean",
+      "Value": "true",
+      "Description": "Permite a seleção entre True e False",
+      "SelectedIndex": 0
+    },
+    {
+      "Id": "d0eddb763f27499a90c82a5bfc0c30f2",
+      "Name": "1. Pasta base para apagar backups RVT e RFA",
+      "Type": "string",
+      "Type2": "string",
+      "Value": "Nenhum arquivo selecionado.",
+      "Description": "Permite selecionar um diretório no sistema e retornar seu caminho",
+      "SelectedIndex": 0
+    }
+  ],
+  "Outputs": [],
+  "Nodes": [
+    {
+      "ConcreteType": "PythonNodeModels.PythonNode, PythonNodeModels",
+      "NodeType": "PythonScriptNode",
+      "Code": "import clr\r\nimport sys\r\nimport System\r\nfrom System.Collections.Generic import *\r\n\r\nclr.AddReference('ProtoGeometry')\r\nfrom Autodesk.DesignScript.Geometry import *\r\n\r\nclr.AddReference('RevitNodes')\r\nimport Revit\r\nclr.ImportExtensions(Revit.Elements)\r\nclr.ImportExtensions(Revit.GeometryConversion)\r\n\r\nclr.AddReference(\"RevitServices\")\r\nimport RevitServices\r\nfrom RevitServices.Persistence import DocumentManager\r\nfrom RevitServices.Transactions import TransactionManager\r\n\r\nclr.AddReference('RevitAPI')\r\nclr.AddReference('RevitAPIUI')\r\nimport Autodesk\r\nfrom Autodesk.Revit.DB import *\r\nfrom Autodesk.Revit.UI import *\r\nimport os\r\nimport re\r\n\r\ndoc = DocumentManager.Instance.CurrentDBDocument\r\nuiapp = DocumentManager.Instance.CurrentUIApplication\r\napp = uiapp.Application\r\nuidoc = uiapp.ActiveUIDocument\r\n\r\nroot = IN[0]\r\ndeleteFiles = IN[1]\r\n\r\npattern1 = r\"\\.\\d{4}\\.rvt$\"\r\npattern2 = r\"\\.\\d{4}\\.rfa$\"\r\n\r\npaths = []\r\n\r\nfor path, subdirs, files in os.walk(root):\r\n\tfor fileName in files:\r\n\t\tif re.search(pattern1, fileName) or re.search(pattern2, fileName):\r\n\t\t\tfilePath = os.path.join(path, fileName)\r\n\t\t\tpaths.append(filePath)\r\n\r\n\t\t\tif deleteFiles:\r\n\t\t\t\tos.remove(filePath)\t\t\t\r\n\r\nOUT = paths\r\n",
+      "Engine": "CPython3",
+      "EngineName": "CPython3",
+      "VariableInputPorts": true,
+      "Id": "b655a33fb6614023b6ea65996240eb87",
+      "Inputs": [
+        {
+          "Id": "15b902fb3122442f9883eae58a71b6ba",
+          "Name": "IN[0]",
+          "Description": "Input #0",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "daaaca407b1c4ed3a36fdf0503387ad2",
+          "Name": "IN[1]",
+          "Description": "Input #1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "618fc09cbd6048de96d28b9646205102",
+          "Name": "OUT",
+          "Description": "Resultado do script Python",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Executa um script Python incorporado."
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.BoolSelector, CoreNodeModels",
+      "NodeType": "BooleanInputNode",
+      "InputValue": true,
+      "Id": "af48dfd6cb9540c5be0198576b6d1e7c",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "6219f6979e594db6aec7324c803773ce",
+          "Name": "",
+          "Description": "Boolean",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Permite a seleção entre True e False"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.Directory, CoreNodeModels",
+      "HintPath": "C:\\Users\\PSystems\\Documents\\Dynamo\\Cascelli\\03-Delete-backups-rvt\\Nenhum arquivo selecionado",
+      "InputValue": "Nenhum arquivo selecionado.",
+      "NodeType": "ExtensionNode",
+      "Id": "d0eddb763f27499a90c82a5bfc0c30f2",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "0185b039126d4f279aa755eda7e81fea",
+          "Name": "",
+          "Description": "Caminho do diretório",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Permite selecionar um diretório no sistema e retornar seu caminho"
+    }
+  ],
+  "Connectors": [
+    {
+      "Start": "6219f6979e594db6aec7324c803773ce",
+      "End": "daaaca407b1c4ed3a36fdf0503387ad2",
+      "Id": "fadc8c456c544275922f240a5fd09212",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "0185b039126d4f279aa755eda7e81fea",
+      "End": "15b902fb3122442f9883eae58a71b6ba",
+      "Id": "6b8fda8d3ac043de81c11d50c6780f30",
+      "IsHidden": "False"
+    }
+  ],
+  "Dependencies": [],
+  "NodeLibraryDependencies": [],
+  "Thumbnail": "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",
+  "GraphDocumentationURL": "https://psystems.com.br",
+  "ExtensionWorkspaceData": [
+    {
+      "ExtensionGuid": "28992e1d-abb9-417f-8b1b-05e053bee670",
+      "Name": "Propriedades",
+      "Version": "2.17",
+      "Data": {}
+    },
+    {
+      "ExtensionGuid": "DFBD9CC0-DB40-457A-939E-8C8555555A9D",
+      "Name": "Generative Design",
+      "Version": "4.0",
+      "Data": {}
+    }
+  ],
+  "Author": "Marcos Antonio Cascelli",
+  "Linting": {
+    "activeLinter": "Nenhum",
+    "activeLinterId": "7b75fb44-43fd-4631-a878-29f4d5d8399a",
+    "warningCount": 0,
+    "errorCount": 0
+  },
+  "Bindings": [],
+  "View": {
+    "Dynamo": {
+      "ScaleFactor": 1.0,
+      "HasRunWithoutCrash": true,
+      "IsVisibleInDynamoLibrary": true,
+      "Version": "2.17.0.3472",
+      "RunType": "Manual",
+      "RunPeriod": "1000"
+    },
+    "Camera": {
+      "Name": "_Visualização do plano de fundo",
+      "EyeX": -17.0,
+      "EyeY": 24.0,
+      "EyeZ": 50.0,
+      "LookX": 12.0,
+      "LookY": -13.0,
+      "LookZ": -58.0,
+      "UpX": 0.0,
+      "UpY": 1.0,
+      "UpZ": 0.0
+    },
+    "ConnectorPins": [],
+    "NodeViews": [
+      {
+        "Name": "Python Script",
+        "ShowGeometry": true,
+        "Id": "b655a33fb6614023b6ea65996240eb87",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 685.76409541375074,
+        "Y": 343.24282323040671
+      },
+      {
+        "Name": "2. Confirma exclusão dos backups ?",
+        "ShowGeometry": true,
+        "Id": "af48dfd6cb9540c5be0198576b6d1e7c",
+        "IsSetAsInput": true,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 105.76409541375074,
+        "Y": 418.24282323040671
+      },
+      {
+        "Name": "1. Pasta base para apagar backups RVT e RFA",
+        "ShowGeometry": true,
+        "Id": "d0eddb763f27499a90c82a5bfc0c30f2",
+        "IsSetAsInput": true,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 73.764095413750738,
+        "Y": 201.24282323040671
+      }
+    ],
+    "Annotations": [
+      {
+        "Id": "9e2229cf2a8b47d88e5869a2434551ac",
+        "Title": "Apaga arquivos de backup do Revit",
+        "DescriptionText": "Apaga arquivos de backup criados pelo Revit das extensões rvt e rfa salvos automaticamente por ele durante o uso de maneira reursiva",
+        "IsExpanded": true,
+        "WidthAdjustment": 0.0,
+        "HeightAdjustment": 0.0,
+        "Nodes": [
+          "b655a33fb6614023b6ea65996240eb87",
+          "af48dfd6cb9540c5be0198576b6d1e7c",
+          "d0eddb763f27499a90c82a5bfc0c30f2",
+          "631f5f34ac814a01b83ec71737a93fa3",
+          "79c73af6b5204ee5a14fd12835e29c9e",
+          "ed62a8aa4bb8401ebbd4bc77bf3517a4"
+        ],
+        "HasNestedGroups": false,
+        "Left": 63.764095413750738,
+        "Top": 70.242823230406714,
+        "Width": 866.0,
+        "Height": 479.99999999999994,
+        "FontSize": 36.0,
+        "GroupStyleId": "00000000-0000-0000-0000-000000000000",
+        "InitialTop": 143.24282323040671,
+        "InitialHeight": 419.99999999999994,
+        "TextblockHeight": 63.0,
+        "Background": "#FFFFAA45"
+      },
+      {
+        "Id": "91de63f98c1645f29d36f27fa557bea4",
+        "Title": "Apaga backups do Revit",
+        "DescriptionText": "",
+        "IsExpanded": true,
+        "WidthAdjustment": 220.59536521439327,
+        "HeightAdjustment": 0.0,
+        "Nodes": [
+          "e24175336e4b49048fd30307c460fe77"
+        ],
+        "HasNestedGroups": false,
+        "Left": 61.09027771649437,
+        "Top": -265.01383728831519,
+        "Width": 539.59536521439327,
+        "Height": 281.0,
+        "FontSize": 36.0,
+        "GroupStyleId": "00000000-0000-0000-0000-000000000000",
+        "InitialTop": -192.01383728831519,
+        "InitialHeight": 145.0,
+        "TextblockHeight": 63.0,
+        "Background": "#FFB5B5B5"
+      },
+      {
+        "Id": "631f5f34ac814a01b83ec71737a93fa3",
+        "Title": "Executa exclusão de arquivos de backup a partir da pasta base de maneira recursiva, ou seja, entrando nos subdiretórios da mesma",
+        "DescriptionText": null,
+        "IsExpanded": true,
+        "WidthAdjustment": 0.0,
+        "HeightAdjustment": 0.0,
+        "Nodes": [],
+        "HasNestedGroups": false,
+        "Left": 625.76409541375074,
+        "Top": 264.24282323040671,
+        "Width": 0.0,
+        "Height": 0.0,
+        "FontSize": 36.0,
+        "GroupStyleId": "00000000-0000-0000-0000-000000000000",
+        "InitialTop": 0.0,
+        "InitialHeight": 0.0,
+        "TextblockHeight": 0.0,
+        "Background": "#FFC1D676",
+        "PinnedNode": "b655a33fb6614023b6ea65996240eb87"
+      },
+      {
+        "Id": "79c73af6b5204ee5a14fd12835e29c9e",
+        "Title": "Abre navegador para localizar pasta base",
+        "DescriptionText": null,
+        "IsExpanded": true,
+        "WidthAdjustment": 0.0,
+        "HeightAdjustment": 0.0,
+        "Nodes": [],
+        "HasNestedGroups": false,
+        "Left": 157.26409541375074,
+        "Top": 151.24282323040671,
+        "Width": 0.0,
+        "Height": 0.0,
+        "FontSize": 36.0,
+        "GroupStyleId": "00000000-0000-0000-0000-000000000000",
+        "InitialTop": 0.0,
+        "InitialHeight": 0.0,
+        "TextblockHeight": 0.0,
+        "Background": "#FFC1D676"
+      },
+      {
+        "Id": "ed62a8aa4bb8401ebbd4bc77bf3517a4",
+        "Title": "Requer confirmação antes da execução da rotina",
+        "DescriptionText": null,
+        "IsExpanded": true,
+        "WidthAdjustment": 0.0,
+        "HeightAdjustment": 0.0,
+        "Nodes": [],
+        "HasNestedGroups": false,
+        "Left": 133.26409541375074,
+        "Top": 368.24282323040671,
+        "Width": 0.0,
+        "Height": 0.0,
+        "FontSize": 36.0,
+        "GroupStyleId": "00000000-0000-0000-0000-000000000000",
+        "InitialTop": 0.0,
+        "InitialHeight": 0.0,
+        "TextblockHeight": 0.0,
+        "Background": "#FFC1D676"
+      },
+      {
+        "Id": "e24175336e4b49048fd30307c460fe77",
+        "Title": "Utilize esata rotina como uma ferramente prática de manutrenção para apagar os arquivos de backup criados automaticamente pelo Revit durante o uso do aplicativo.\n\nEsta rotina serve para limpar e liberar espaço de armazenamento do disco durante o desenvolvimento de projetos.\n\nMantenha backups regulares de seus projetos em locais extras, tais como HDDs externos ou storages de rede como boa prática de segurança",
+        "DescriptionText": null,
+        "IsExpanded": true,
+        "WidthAdjustment": 0.0,
+        "HeightAdjustment": 0.0,
+        "Nodes": [],
+        "HasNestedGroups": false,
+        "Left": 71.09027771649437,
+        "Top": -184.01383728831519,
+        "Width": 0.0,
+        "Height": 0.0,
+        "FontSize": 36.0,
+        "GroupStyleId": "00000000-0000-0000-0000-000000000000",
+        "InitialTop": 0.0,
+        "InitialHeight": 0.0,
+        "TextblockHeight": 0.0,
+        "Background": "#FFC1D676"
+      }
+    ],
+    "X": -74.374816587984611,
+    "Y": -36.960410468388488,
+    "Zoom": 1.0542982150113265
+  }
+}
