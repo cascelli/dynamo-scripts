@@ -1,0 +1,1476 @@
+{
+  "Uuid": "6e5786de-9c19-49ef-b18c-bd4144c14151",
+  "IsCustomNode": false,
+  "Description": "Insere cotas entre dispositivos elétricos orientados em uma mesma direção",
+  "Name": "Cotas_automaticas",
+  "ElementResolver": {
+    "ResolutionMap": {}
+  },
+  "Inputs": [
+    {
+      "Id": "f7ba6757bcca4fb0bcd04529cae919db",
+      "Name": "2. É cota horizontal ?",
+      "Type": "boolean",
+      "Type2": "boolean",
+      "Value": "true",
+      "Description": "Permite a seleção entre True e False",
+      "SelectedIndex": 0
+    },
+    {
+      "Id": "0be62eb641824fa08ad31eb049411a3a",
+      "Name": "1. Selecione os elementos a cotar",
+      "Type": "selection",
+      "Type2": "hostSelection",
+      "Value": "95631217-3796-43f2-a5e3-be078c43cdb7-006f8266,95631217-3796-43f2-a5e3-be078c43cdb7-006f829d",
+      "Description": "Selecione múltiplas elementos a partir do documento do Revit.",
+      "SelectedIndex": 0
+    },
+    {
+      "Id": "a54ea15d209a46b5857fa6dad003fa7e",
+      "Name": "4. Estilo da cota",
+      "Type": "string",
+      "Type2": "string",
+      "Value": "Arrow - 2.0 Tw Cen MT Transparente Red",
+      "Description": "Cria uma sequência de caracteres.",
+      "SelectedIndex": 0
+    },
+    {
+      "Id": "fc4dbd4139b3409db5ed5fe5ded13685",
+      "Name": "3.  Estilo padrão de cota ? ",
+      "Type": "boolean",
+      "Type2": "boolean",
+      "Value": "true",
+      "Description": "Permite a seleção entre True e False",
+      "SelectedIndex": 0
+    }
+  ],
+  "Outputs": [],
+  "Nodes": [
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CustomNodes.Function, DynamoCore",
+      "FunctionSignature": "ba8b7d16-46d3-4c93-96c3-df912d9c1f9e",
+      "FunctionType": "Graph",
+      "NodeType": "FunctionNode",
+      "Id": "2db12a9ad36640ebb1016e38b1ea30f3",
+      "Inputs": [
+        {
+          "Id": "67459e4b7a154dd1a9c4dc7437bbf5de",
+          "Name": "view",
+          "Description": "View to place dimension in\n\nView\nValor padrão : Revit.Application.Document.Current.ActiveView",
+          "UsingDefaultValue": true,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "3f50a05985b6431081e8e39f7f81480a",
+          "Name": "line",
+          "Description": "Location of the dimension\n\nCurve[]..[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "e4ec79121dbd492ba31dd8b2ed3195d0",
+          "Name": "references",
+          "Description": "Autodesk.Revit.DB.Reference\n\nvar[]..[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "70ef9962e64d4e0f8f43c7aab2ac08fb",
+          "Name": "dimensionType",
+          "Description": "var[]..[]\nValor padrão : null",
+          "UsingDefaultValue": true,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "5b9f7494000e40478d61a4412722155d",
+          "Name": "Dimension",
+          "Description": "valor de retorno",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Creates a new linear dimension from at least two geometric references of an object."
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Autodesk.DesignScript.Geometry.Line.ByStartPointDirectionLength@Autodesk.DesignScript.Geometry.Point,Autodesk.DesignScript.Geometry.Vector,double",
+      "Id": "809612c8e1a44d889f0f32e23c8a7666",
+      "Inputs": [
+        {
+          "Id": "c57f72140dab4ee6a3cb02e3547904a9",
+          "Name": "startPoint",
+          "Description": "Ponto inicial da linha\n\nPoint",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "9a3ff8d900d14072b2a82bb67ce1f912",
+          "Name": "direction",
+          "Description": "Vetor de direção\n\nVector",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "a301f9aa7f4b4c49928079e64b052a98",
+          "Name": "length",
+          "Description": "Comprimento da linha\n\ndouble\nValor padrão : 1",
+          "UsingDefaultValue": true,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "a775133e75a04fddac960fd2c4972456",
+          "Name": "Line",
+          "Description": "Linha com base na direção inicial e no comprimento",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Crie uma linha reta começando no ponto inicial, estendendo-se na direção do vetor pelo comprimento especificado.\n\nLine.ByStartPointDirectionLength (startPoint: Point, direction: Vector, length: double = 1): Line"
+    },
+    {
+      "ConcreteType": "PythonNodeModels.PythonNode, PythonNodeModels",
+      "NodeType": "PythonScriptNode",
+      "Code": "import clr\r\nimport sys\r\nimport System\r\nfrom System.Collections.Generic import *\r\n\r\nclr.AddReference('ProtoGeometry')\r\nfrom Autodesk.DesignScript.Geometry import *\r\n\r\nclr.AddReference('RevitNodes')\r\nimport Revit\r\nclr.ImportExtensions(Revit.Elements)\r\nclr.ImportExtensions(Revit.GeometryConversion) \r\n\r\nclr.AddReference(\"RevitServices\")\r\nimport RevitServices\r\nfrom RevitServices.Persistence import DocumentManager\r\nfrom RevitServices.Transactions import TransactionManager\r\n\r\nclr.AddReference('RevitAPI')\r\nclr.AddReference('RevitAPIUI')\r\nimport Autodesk\r\nfrom Autodesk.Revit.DB import *\r\nfrom Autodesk.Revit.UI import *\r\nfrom Autodesk.Revit.UI import Selection\r\n\r\ndoc = DocumentManager.Instance.CurrentDBDocument\r\nuiapp = DocumentManager.Instance.CurrentUIApplication\r\napp = uiapp.Application\r\nuidoc = uiapp.ActiveUIDocument\r\n\r\npoint = uidoc.Selection.PickPoint(\"\")\r\npoint_dyn = point.ToPoint()\r\n\r\nOUT = point_dyn\r\n",
+      "Engine": "CPython3",
+      "EngineName": "CPython3",
+      "VariableInputPorts": true,
+      "Id": "9e6849730db04f678cf327c23f45891f",
+      "Inputs": [
+        {
+          "Id": "4addaa8144e04712bf4b26fe9a009264",
+          "Name": "IN[0]",
+          "Description": "Input #0",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "36a05c61e33a4c9bbf55856bbc83b499",
+          "Name": "OUT",
+          "Description": "Resultado do script Python",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Executa um script Python incorporado."
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Autodesk.DesignScript.Geometry.Vector.XAxis",
+      "Id": "4ac35ad9d09b480ebb44a163271df91e",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "2dda414bf3eb4da5a2fa8959bd1f81fb",
+          "Name": "Vector",
+          "Description": "Vector",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Obter vetor do eixo X canônico (1,0,0)\n\nVector.XAxis ( ): Vector"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Autodesk.DesignScript.Geometry.Vector.YAxis",
+      "Id": "4b7d6462072c46cca1d585c65d797feb",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "0e6dd1c7ccbc483781587d2727e4d0f3",
+          "Name": "Vector",
+          "Description": "Vector",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Obter vetor do eixo Y canônico (0,1,0)\n\nVector.YAxis ( ): Vector"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.BoolSelector, CoreNodeModels",
+      "NodeType": "BooleanInputNode",
+      "InputValue": true,
+      "Id": "f7ba6757bcca4fb0bcd04529cae919db",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "64f7088c82a94ffd8f99c480f31f9222",
+          "Name": "",
+          "Description": "Boolean",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Permite a seleção entre True e False"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CustomNodes.Function, DynamoCore",
+      "FunctionSignature": "3ec17443-ffb8-4bb9-a2b7-ec106b4f7a82",
+      "FunctionType": "Graph",
+      "NodeType": "FunctionNode",
+      "Id": "7bcac19c49d94a7db742af1e89ff3567",
+      "Inputs": [
+        {
+          "Id": "51c3c3c8a3494b66a123c704fa38d730",
+          "Name": "familyInstance",
+          "Description": "var[]..[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "09215fb4652e49828c85fc8af0545644",
+          "Name": "name",
+          "Description": "Reference Plane Name\n\nstring\nValor padrão : \"Center (Left/Right)\"",
+          "UsingDefaultValue": true,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "452c2017aed5492dba19c5c18c09aaea",
+          "Name": "Reference",
+          "Description": "valor de retorno",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "81379f3523e346449094d2c4aca0eae6",
+          "Name": "Plane",
+          "Description": "valor de retorno",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Works only in Revit 2018.1 and later.\r\nGets the reference corresponding to the named reference plane in the instance's family. "
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.StringInput, CoreNodeModels",
+      "NodeType": "StringInputNode",
+      "InputValue": "Center (Left/Right)",
+      "Id": "aaa352e804214b2db371ebe2b69239fe",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "679a1c0ad6414113af58dff9519343f9",
+          "Name": "",
+          "Description": "String",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Cria uma sequência de caracteres."
+    },
+    {
+      "ConcreteType": "Dynamo.Nodes.DSModelElementsSelection, DSRevitNodesUI",
+      "NodeType": "ExtensionNode",
+      "InstanceId": [
+        "95631217-3796-43f2-a5e3-be078c43cdb7-006f8266",
+        "95631217-3796-43f2-a5e3-be078c43cdb7-006f829d"
+      ],
+      "Id": "0be62eb641824fa08ad31eb049411a3a",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "567dfa5ba31d4dcdbbf04dd15c2342fc",
+          "Name": "Elements",
+          "Description": "Os elementos selecionados.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled"
+    },
+    {
+      "ConcreteType": "DSRevitNodesUI.ElementTypes, DSRevitNodesUI",
+      "SelectedIndex": 84,
+      "SelectedString": "DimensionType",
+      "NodeType": "ExtensionNode",
+      "Id": "a5503717841a4c45a372ad21073061b9",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "54843d08205a40b9a3eba54ff29876f2",
+          "Name": "Classes",
+          "Description": "O Classes selecionado",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Todos as subclasses de elementos."
+    },
+    {
+      "ConcreteType": "DSRevitNodesUI.ElementsOfType, DSRevitNodesUI",
+      "NodeType": "ExtensionNode",
+      "Id": "c8e691eb819a494b98fbc46ef343bbfd",
+      "Inputs": [
+        {
+          "Id": "e744219d931c42a4b7a368507f6d6873",
+          "Name": "element class",
+          "Description": "Uma classe de elemento.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "32861a2302d84ca28ff232ebb97edb97",
+          "Name": "elements",
+          "Description": "Todos os elementos no documento ativo de uma determinada classe.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Todos os elementos no documento ativo de uma determinada classe."
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Revit.Elements.Element.Name",
+      "Id": "500dc7a2d7574d7f8bd7e20161bf4874",
+      "Inputs": [
+        {
+          "Id": "982bcfd4d23f4c858bdf83b23067e5a7",
+          "Name": "element",
+          "Description": "Revit.Elements.Element",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "697bb559865641a3968357df8e1c14a8",
+          "Name": "string",
+          "Description": "string",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Obter o nome do elemento\n\nElement.Name: string"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "==@var[]..[],var[]..[]",
+      "Id": "343ae961243f470d95cc0df694d9a76b",
+      "Inputs": [
+        {
+          "Id": "aa6c4bb03a4945e9aae9088019e621c6",
+          "Name": "x",
+          "Description": "Objeto de tipo básico para comparar (por exemplo, booleano, inteiro, duplo, sequência de caracteres etc.)\n\nvar[]..[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "6392ee0ec00c487da4d1ba2d318c54f0",
+          "Name": "y",
+          "Description": "Objeto de tipo básico para comparar (por exemplo, booleano, inteiro, duplo, sequência de caracteres etc.)\n\nvar[]..[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "d2ab3e2447c84db087978d729514fdc2",
+          "Name": "bool",
+          "Description": "Resultado da verificação de igualdade",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Compara se x e y são iguais\n\n== (x: var[]..[], y: var[]..[]): var[]..[]"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.StringInput, CoreNodeModels",
+      "NodeType": "StringInputNode",
+      "InputValue": "Arrow - 2.0 Tw Cen MT Transparente Red",
+      "Id": "a54ea15d209a46b5857fa6dad003fa7e",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "1074bfe30be5443d854d5a0e39d5bb46",
+          "Name": "",
+          "Description": "String",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Cria uma sequência de caracteres."
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "DSCore.List.FilterByBoolMask@var[]..[],var[]..[]",
+      "Id": "ebde0c991ec341e2a3886873c9d9a9c3",
+      "Inputs": [
+        {
+          "Id": "7828cd2ebabb4125a644e6cc48540d0b",
+          "Name": "list",
+          "Description": "Lista a filtrar.\n\nvar[]..[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "2c6f552e67464f088a14cd719f6f8bd7",
+          "Name": "mask",
+          "Description": "Lista de booleanos representando uma máscara.\n\nvar[]..[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "9db65d3dc450440098922bd7830ffbaf",
+          "Name": "in",
+          "Description": "Os itens cujo índice de máscara é verdadeiro.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "2300e1a72848474fb1dd53df8c29065b",
+          "Name": "out",
+          "Description": "Os itens cujo índice de máscara é falso.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Filtra uma sequência examinando os índices correspondentes em lista separada de booleanos.\n\nList.FilterByBoolMask (list: var[]..[], mask: var[]..[]): var[]..[]"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.BoolSelector, CoreNodeModels",
+      "NodeType": "BooleanInputNode",
+      "InputValue": true,
+      "Id": "fc4dbd4139b3409db5ed5fe5ded13685",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "cff395cac9604372b9df85c62d30c9c8",
+          "Name": "",
+          "Description": "Boolean",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Permite a seleção entre True e False"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Logic.RefactoredIf, CoreNodeModels",
+      "NodeType": "ExtensionNode",
+      "Id": "92373e8647124a08a7dfaeeec2785ead",
+      "Inputs": [
+        {
+          "Id": "86c78de8b943495984403d68c5680d33",
+          "Name": "test",
+          "Description": "Teste booleano",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "d986e81a998c462a95e9de2459bd06b6",
+          "Name": "true",
+          "Description": "Retornado se o teste for verdadeiro",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "4a6176cad1984c7885b4ca9af57ebd49",
+          "Name": "false",
+          "Description": "Retornado se o teste for falso",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "867eb9470718468691e7ced9b047061e",
+          "Name": "result",
+          "Description": "Bloco de resultados produzido",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Retorna o resultado da entrada Verdadeiro ou Falso, dependendo de qual valor booleano é alternado na entrada de teste. Suporta a recursão, que requer que somente um único ramo seja executado. É muito importante que ambos os ramos Verdadeiro e Falso estejam isolados e que não interajam entre si."
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CodeBlockNodeModel, DynamoCore",
+      "NodeType": "CodeBlockNode",
+      "Code": "null;",
+      "Id": "a70bb0bc47d44d45b2534cb1ff469e91",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "bcba2862e9614133be6ac0531bba653e",
+          "Name": "",
+          "Description": "Valor da expressão na linha 1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Permite que o código DesignScript seja criado diretamente"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Watch, CoreNodeModels",
+      "NodeType": "ExtensionNode",
+      "Id": "5c8b2d6773f7493fb33c46d951a0bd35",
+      "Inputs": [
+        {
+          "Id": "40f5f4f625684508a5235a3b5f40c38e",
+          "Name": "",
+          "Description": "Nó do qual a saída é exibida",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "fe8f4fc6305248f1ac15c62ae8516ff0",
+          "Name": "",
+          "Description": "Saída do nó",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Visualizar a saída do nó"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CustomNodes.Function, DynamoCore",
+      "FunctionSignature": "4a06767e-f40d-4774-8da2-a3ed45e6a73f",
+      "FunctionType": "Graph",
+      "NodeType": "FunctionNode",
+      "Id": "cd833c686cc24a9da979b4d3abd6844f",
+      "Inputs": [
+        {
+          "Id": "2af80468dece42e8b254d97aa73af52e",
+          "Name": "If",
+          "Description": "Value to determine\nthen or else outcome.\n\nTrue  = Then\nFalse = Else\n\nbool\nValor padrão : true",
+          "UsingDefaultValue": true,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "01e1f86749b942708ec863d45d0b1100",
+          "Name": "Then",
+          "Description": "Outcome if True\n\nvar[]..[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "8a955ef615b64bb5b585c79de3d76176",
+          "Name": "Else",
+          "Description": "Outcome if False\n\nvar[]..[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "85e3c15231fe444bb9eecf69abe50aab",
+          "Name": "Output",
+          "Description": "The outcome\n\nTrue  = Then\nFalse = Else",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Retains the functionality of the old if node (no Python used). All credit to the Zebra package - hadn't been updated since 2016 so decided to give it a new home."
+    }
+  ],
+  "Connectors": [
+    {
+      "Start": "a775133e75a04fddac960fd2c4972456",
+      "End": "3f50a05985b6431081e8e39f7f81480a",
+      "Id": "6512370d327145dd9d51d12254d9de26",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "36a05c61e33a4c9bbf55856bbc83b499",
+      "End": "c57f72140dab4ee6a3cb02e3547904a9",
+      "Id": "1f1207044554496d9602fa48215a2299",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "2dda414bf3eb4da5a2fa8959bd1f81fb",
+      "End": "01e1f86749b942708ec863d45d0b1100",
+      "Id": "9db96cc764a44c95838f7a30b5b3d36c",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "0e6dd1c7ccbc483781587d2727e4d0f3",
+      "End": "8a955ef615b64bb5b585c79de3d76176",
+      "Id": "525df2a765004f0da75ea4e1cf5c5b49",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "64f7088c82a94ffd8f99c480f31f9222",
+      "End": "2af80468dece42e8b254d97aa73af52e",
+      "Id": "e07ae5d16ade4da0b91e22b317ceae3c",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "452c2017aed5492dba19c5c18c09aaea",
+      "End": "e4ec79121dbd492ba31dd8b2ed3195d0",
+      "Id": "e23ab549c5cc4e4c997b02f8e0597892",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "679a1c0ad6414113af58dff9519343f9",
+      "End": "09215fb4652e49828c85fc8af0545644",
+      "Id": "ec20317825a7458898dce0c16731f336",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "567dfa5ba31d4dcdbbf04dd15c2342fc",
+      "End": "51c3c3c8a3494b66a123c704fa38d730",
+      "Id": "7d59d71a4e414a56a493c7efc5b320bb",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "54843d08205a40b9a3eba54ff29876f2",
+      "End": "e744219d931c42a4b7a368507f6d6873",
+      "Id": "f280016a64f142519f19852c6eca91b5",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "32861a2302d84ca28ff232ebb97edb97",
+      "End": "982bcfd4d23f4c858bdf83b23067e5a7",
+      "Id": "181356de7a4245f88d3982103ecc8878",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "32861a2302d84ca28ff232ebb97edb97",
+      "End": "7828cd2ebabb4125a644e6cc48540d0b",
+      "Id": "765c8d2f2d22466b871265cbe1b6864f",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "697bb559865641a3968357df8e1c14a8",
+      "End": "aa6c4bb03a4945e9aae9088019e621c6",
+      "Id": "3bf3ba4d9967432babf5ac67c8dd90a0",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "d2ab3e2447c84db087978d729514fdc2",
+      "End": "2c6f552e67464f088a14cd719f6f8bd7",
+      "Id": "1b4fc791d9254880a9336326ba6dfe22",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "1074bfe30be5443d854d5a0e39d5bb46",
+      "End": "6392ee0ec00c487da4d1ba2d318c54f0",
+      "Id": "b7b2160b9de44751839623d794a45b9e",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "9db65d3dc450440098922bd7830ffbaf",
+      "End": "4a6176cad1984c7885b4ca9af57ebd49",
+      "Id": "187c2cc26e214ab09b6d8e478dd1ec2f",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "cff395cac9604372b9df85c62d30c9c8",
+      "End": "86c78de8b943495984403d68c5680d33",
+      "Id": "931d51213d264079b619cb584e0c92d6",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "867eb9470718468691e7ced9b047061e",
+      "End": "40f5f4f625684508a5235a3b5f40c38e",
+      "Id": "44edac94c66545579b0d12054570826e",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "867eb9470718468691e7ced9b047061e",
+      "End": "70ef9962e64d4e0f8f43c7aab2ac08fb",
+      "Id": "9dcfe51f0cdd4415b9e2f95f17d1d39a",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "bcba2862e9614133be6ac0531bba653e",
+      "End": "d986e81a998c462a95e9de2459bd06b6",
+      "Id": "43f729318a4440a086e9f604635bf3d3",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "85e3c15231fe444bb9eecf69abe50aab",
+      "End": "9a3ff8d900d14072b2a82bb67ce1f912",
+      "Id": "821cc7dd075a41c29ec3fe6eac90a19d",
+      "IsHidden": "False"
+    }
+  ],
+  "Dependencies": [
+    "ba8b7d16-46d3-4c93-96c3-df912d9c1f9e",
+    "3ec17443-ffb8-4bb9-a2b7-ec106b4f7a82",
+    "4a06767e-f40d-4774-8da2-a3ed45e6a73f"
+  ],
+  "NodeLibraryDependencies": [
+    {
+      "Name": "Genius Loci",
+      "Version": "2024.5.29",
+      "ReferenceType": "Package",
+      "Nodes": [
+        "2db12a9ad36640ebb1016e38b1ea30f3",
+        "7bcac19c49d94a7db742af1e89ff3567"
+      ]
+    },
+    {
+      "Name": "Crumple",
+      "Version": "2021.5.27",
+      "ReferenceType": "Package",
+      "Nodes": [
+        "cd833c686cc24a9da979b4d3abd6844f"
+      ]
+    }
+  ],
+  "Thumbnail": "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",
+  "GraphDocumentationURL": null,
+  "ExtensionWorkspaceData": [
+    {
+      "ExtensionGuid": "28992e1d-abb9-417f-8b1b-05e053bee670",
+      "Name": "Propriedades",
+      "Version": "2.17",
+      "Data": {}
+    },
+    {
+      "ExtensionGuid": "DFBD9CC0-DB40-457A-939E-8C8555555A9D",
+      "Name": "Generative Design",
+      "Version": "4.0",
+      "Data": {}
+    }
+  ],
+  "Author": "",
+  "Linting": {
+    "activeLinter": "Nenhum",
+    "activeLinterId": "7b75fb44-43fd-4631-a878-29f4d5d8399a",
+    "warningCount": 0,
+    "errorCount": 0
+  },
+  "Bindings": [],
+  "View": {
+    "Dynamo": {
+      "ScaleFactor": 1.0,
+      "HasRunWithoutCrash": true,
+      "IsVisibleInDynamoLibrary": true,
+      "Version": "2.17.0.3472",
+      "RunType": "Manual",
+      "RunPeriod": "1000"
+    },
+    "Camera": {
+      "Name": "_Visualização do plano de fundo",
+      "EyeX": -17.0,
+      "EyeY": 24.0,
+      "EyeZ": 50.0,
+      "LookX": 12.0,
+      "LookY": -13.0,
+      "LookZ": -58.0,
+      "UpX": 0.0,
+      "UpY": 1.0,
+      "UpZ": 0.0
+    },
+    "ConnectorPins": [],
+    "NodeViews": [
+      {
+        "Name": "Dimension ByReferences",
+        "ShowGeometry": true,
+        "Id": "2db12a9ad36640ebb1016e38b1ea30f3",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 4650.1270633884205,
+        "Y": 133.50970010548275
+      },
+      {
+        "Name": "Line.ByStartPointDirectionLength",
+        "ShowGeometry": true,
+        "Id": "809612c8e1a44d889f0f32e23c8a7666",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 3543.3753972873938,
+        "Y": -830.40008247831747
+      },
+      {
+        "Name": "Select Point",
+        "ShowGeometry": true,
+        "Id": "9e6849730db04f678cf327c23f45891f",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 3248.1291773508005,
+        "Y": -827.78951459083316
+      },
+      {
+        "Name": "Vector.XAxis",
+        "ShowGeometry": true,
+        "Id": "4ac35ad9d09b480ebb44a163271df91e",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 2806.327999280034,
+        "Y": -549.41841159045407
+      },
+      {
+        "Name": "Vector.YAxis",
+        "ShowGeometry": true,
+        "Id": "4b7d6462072c46cca1d585c65d797feb",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 2804.9160310846178,
+        "Y": -396.92584648548313
+      },
+      {
+        "Name": "2. É cota horizontal ?",
+        "ShowGeometry": true,
+        "Id": "f7ba6757bcca4fb0bcd04529cae919db",
+        "IsSetAsInput": true,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 2804.9160310846173,
+        "Y": -682.14342195959557
+      },
+      {
+        "Name": "FamilyInstance Reference ByName",
+        "ShowGeometry": true,
+        "Id": "7bcac19c49d94a7db742af1e89ff3567",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 3217.7418135837147,
+        "Y": 203.29523121539842
+      },
+      {
+        "Name": "String",
+        "ShowGeometry": true,
+        "Id": "aaa352e804214b2db371ebe2b69239fe",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 2831.5940541283239,
+        "Y": 346.35992798928237
+      },
+      {
+        "Name": "1. Selecione os elementos a cotar",
+        "ShowGeometry": true,
+        "Id": "0be62eb641824fa08ad31eb049411a3a",
+        "IsSetAsInput": true,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 2784.1705652786513,
+        "Y": 86.393373836187891
+      },
+      {
+        "Name": "Element Classes",
+        "ShowGeometry": true,
+        "Id": "a5503717841a4c45a372ad21073061b9",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1612.3509903293766,
+        "Y": 980.62296054797775
+      },
+      {
+        "Name": "All Elements of Class",
+        "ShowGeometry": true,
+        "Id": "c8e691eb819a494b98fbc46ef343bbfd",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1900.4015154887757,
+        "Y": 980.36484103692987
+      },
+      {
+        "Name": "Element.Name",
+        "ShowGeometry": true,
+        "Id": "500dc7a2d7574d7f8bd7e20161bf4874",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 2246.0329379815021,
+        "Y": 1083.8713465014721
+      },
+      {
+        "Name": "==",
+        "ShowGeometry": true,
+        "Id": "343ae961243f470d95cc0df694d9a76b",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 2840.2784332627753,
+        "Y": 1079.9566162507217
+      },
+      {
+        "Name": "4. Estilo da cota",
+        "ShowGeometry": true,
+        "Id": "a54ea15d209a46b5857fa6dad003fa7e",
+        "IsSetAsInput": true,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 2532.761501429904,
+        "Y": 1295.5838536077345
+      },
+      {
+        "Name": "List.FilterByBoolMask",
+        "ShowGeometry": true,
+        "Id": "ebde0c991ec341e2a3886873c9d9a9c3",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 3166.345399705021,
+        "Y": 981.7619024787864
+      },
+      {
+        "Name": "3.  Estilo padrão de cota ? ",
+        "ShowGeometry": true,
+        "Id": "fc4dbd4139b3409db5ed5fe5ded13685",
+        "IsSetAsInput": true,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 3171.6584040379016,
+        "Y": 693.536324494349
+      },
+      {
+        "Name": "If",
+        "ShowGeometry": true,
+        "Id": "92373e8647124a08a7dfaeeec2785ead",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 3658.03367604721,
+        "Y": 792.4436516539306
+      },
+      {
+        "Name": "Code Block",
+        "ShowGeometry": true,
+        "Id": "a70bb0bc47d44d45b2534cb1ff469e91",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 3170.3254712584071,
+        "Y": 837.51504079976826
+      },
+      {
+        "Name": "Watch",
+        "ShowGeometry": true,
+        "Id": "5c8b2d6773f7493fb33c46d951a0bd35",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 4045.9117133910831,
+        "Y": 1053.9352172775684
+      },
+      {
+        "Name": "© OldIf",
+        "ShowGeometry": true,
+        "Id": "cd833c686cc24a9da979b4d3abd6844f",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 3232.0430005392159,
+        "Y": -549.296937000132
+      }
+    ],
+    "Annotations": [
+      {
+        "Id": "6bdbccd1581a4ee5a81362f48a07db2b",
+        "Title": "Desenha linha da cota",
+        "DescriptionText": "",
+        "IsExpanded": true,
+        "WidthAdjustment": 0.0,
+        "HeightAdjustment": 0.0,
+        "Nodes": [
+          "809612c8e1a44d889f0f32e23c8a7666",
+          "9e6849730db04f678cf327c23f45891f",
+          "4ac35ad9d09b480ebb44a163271df91e",
+          "4b7d6462072c46cca1d585c65d797feb",
+          "f7ba6757bcca4fb0bcd04529cae919db",
+          "cd833c686cc24a9da979b4d3abd6844f",
+          "23d4274830af473cbded41e358470b01",
+          "12307276de414d4a9b92a10fd4d8312f",
+          "1d6ef954a7c24904b0602877659a2190"
+        ],
+        "HasNestedGroups": false,
+        "Left": 2766.9160310846173,
+        "Top": -1002.7895145908332,
+        "Width": 1110.4593662027764,
+        "Height": 737.86366810535,
+        "FontSize": 36.0,
+        "GroupStyleId": "00000000-0000-0000-0000-000000000000",
+        "InitialTop": -929.78951459083316,
+        "InitialHeight": 694.86366810535,
+        "TextblockHeight": 63.0,
+        "Background": "#FFC1D676"
+      },
+      {
+        "Id": "1d16483017f541ba947e18f2d99596b4",
+        "Title": "Seleciona os dispositivos elétricos a serem cotados entre sí",
+        "DescriptionText": "A rotina não cria cotas entre dispositivos de orientações diferentes. A orientação da linha de inserção da cota tem que ser a mesma da linha de seleção dos dispositvos selecionados",
+        "IsExpanded": true,
+        "WidthAdjustment": 0.0,
+        "HeightAdjustment": 0.0,
+        "Nodes": [
+          "7bcac19c49d94a7db742af1e89ff3567",
+          "aaa352e804214b2db371ebe2b69239fe",
+          "0be62eb641824fa08ad31eb049411a3a",
+          "be1350768acf4020b1958e4a372ce616",
+          "dc9043d6322045d9891a6e9d97311e16"
+        ],
+        "HasNestedGroups": false,
+        "Left": 2774.1705652786513,
+        "Top": -216.60662616381211,
+        "Width": 787.57124830506336,
+        "Height": 694.96655415309442,
+        "FontSize": 36.0,
+        "GroupStyleId": "00000000-0000-0000-0000-000000000000",
+        "InitialTop": -91.606626163812109,
+        "InitialHeight": 599.96655415309442,
+        "TextblockHeight": 115.0,
+        "Background": "#FFC1D676"
+      },
+      {
+        "Id": "95b6bbbefb214fe19530f8bbac9a3e5e",
+        "Title": "Escolhe um estilo de cota a ser usado",
+        "DescriptionText": "A rotina escolhe o ultimo modelo selecionado no projeto, se optado pelo estilo padão. Para estilos personalizados ou fixos, deve-se inserir o nome exato do estilo desejado no campo de especificação do mesmo. O estilo especificado precisa existir como uma família no projeto para funcionar adequadamente",
+        "IsExpanded": true,
+        "WidthAdjustment": 0.0,
+        "HeightAdjustment": 0.0,
+        "Nodes": [
+          "a5503717841a4c45a372ad21073061b9",
+          "c8e691eb819a494b98fbc46ef343bbfd",
+          "500dc7a2d7574d7f8bd7e20161bf4874",
+          "343ae961243f470d95cc0df694d9a76b",
+          "a54ea15d209a46b5857fa6dad003fa7e",
+          "ebde0c991ec341e2a3886873c9d9a9c3",
+          "fc4dbd4139b3409db5ed5fe5ded13685",
+          "92373e8647124a08a7dfaeeec2785ead",
+          "a70bb0bc47d44d45b2534cb1ff469e91",
+          "5c8b2d6773f7493fb33c46d951a0bd35",
+          "568d52db4fe04fad815e4e19d479e99d",
+          "667c0a52655f47b8a084fb82d30b687f"
+        ],
+        "HasNestedGroups": false,
+        "Left": 1602.3509903293766,
+        "Top": 533.536324494349,
+        "Width": 2730.5607230617065,
+        "Height": 913.04752911338551,
+        "FontSize": 36.0,
+        "GroupStyleId": "00000000-0000-0000-0000-000000000000",
+        "InitialTop": 606.536324494349,
+        "InitialHeight": 870.04752911338551,
+        "TextblockHeight": 63.0,
+        "Background": "#FFC1D676"
+      },
+      {
+        "Id": "faa41b01a840459aaece8f8445526788",
+        "Title": "Cria as cotas",
+        "DescriptionText": "",
+        "IsExpanded": true,
+        "WidthAdjustment": 0.0,
+        "HeightAdjustment": 0.0,
+        "Nodes": [
+          "2db12a9ad36640ebb1016e38b1ea30f3",
+          "1db43b33066c46b8815e8c105c3d0a05"
+        ],
+        "HasNestedGroups": false,
+        "Left": 4634.6270633884205,
+        "Top": -12.49029989451725,
+        "Width": 310.0,
+        "Height": 378.0,
+        "FontSize": 36.0,
+        "GroupStyleId": "00000000-0000-0000-0000-000000000000",
+        "InitialTop": 60.50970010548275,
+        "InitialHeight": 335.00000000000006,
+        "TextblockHeight": 63.0,
+        "Background": "#FFFFAA45"
+      },
+      {
+        "Id": "e557d5e126f14bc7bbb474b59526f52f",
+        "Title": "Criação de cotas automáticas entre dispositivos ",
+        "DescriptionText": "",
+        "IsExpanded": true,
+        "WidthAdjustment": 2.3372292626772833,
+        "HeightAdjustment": 3.9050286016959035,
+        "Nodes": [
+          "8b25e36ba04240848ab723f69d371395",
+          "cceeee3143da4f08ac77e4e3c24f7696",
+          "92bedcd999c34a9f8d1084c1dc593465"
+        ],
+        "HasNestedGroups": false,
+        "Left": 1623.3644888190036,
+        "Top": -1000.9919288133345,
+        "Width": 1041.1855191459733,
+        "Height": 1021.1821121089956,
+        "FontSize": 36.0,
+        "GroupStyleId": "00000000-0000-0000-0000-000000000000",
+        "InitialTop": -927.99192881333454,
+        "InitialHeight": 943.0,
+        "TextblockHeight": 63.0,
+        "Background": "#FFD8D8D8"
+      },
+      {
+        "Id": "23d4274830af473cbded41e358470b01",
+        "Title": "Instalar e selecionar o pacote do Iron Python 2.7\n\n•  Edite o node \n•  Selecione Executar : IronPython 2.7",
+        "DescriptionText": null,
+        "IsExpanded": true,
+        "WidthAdjustment": 0.0,
+        "HeightAdjustment": 0.0,
+        "Nodes": [],
+        "HasNestedGroups": false,
+        "Left": 3190.1291773508005,
+        "Top": -921.78951459083316,
+        "Width": 0.0,
+        "Height": 0.0,
+        "FontSize": 36.0,
+        "GroupStyleId": "00000000-0000-0000-0000-000000000000",
+        "InitialTop": 0.0,
+        "InitialHeight": 0.0,
+        "TextblockHeight": 0.0,
+        "Background": "#FFC1D676",
+        "PinnedNode": "9e6849730db04f678cf327c23f45891f"
+      },
+      {
+        "Id": "12307276de414d4a9b92a10fd4d8312f",
+        "Title": "Posicionamento da cotas (Horizontal ou vertical )",
+        "DescriptionText": null,
+        "IsExpanded": true,
+        "WidthAdjustment": 0.0,
+        "HeightAdjustment": 0.0,
+        "Nodes": [],
+        "HasNestedGroups": false,
+        "Left": 2776.9160310846173,
+        "Top": -732.14342195959557,
+        "Width": 0.0,
+        "Height": 0.0,
+        "FontSize": 36.0,
+        "GroupStyleId": "00000000-0000-0000-0000-000000000000",
+        "InitialTop": 0.0,
+        "InitialHeight": 0.0,
+        "TextblockHeight": 0.0,
+        "Background": "#FFC1D676",
+        "PinnedNode": "f7ba6757bcca4fb0bcd04529cae919db"
+      },
+      {
+        "Id": "be1350768acf4020b1958e4a372ce616",
+        "Title": "Especifica a orientação da família dos dispositivos\n•  As cotas só tratam famílias com uma mesma orientação definida nos seus respectivos modelos",
+        "DescriptionText": null,
+        "IsExpanded": true,
+        "WidthAdjustment": 0.0,
+        "HeightAdjustment": 0.0,
+        "Nodes": [],
+        "HasNestedGroups": false,
+        "Left": 2791.0940541283239,
+        "Top": 267.35992798928237,
+        "Width": 0.0,
+        "Height": 0.0,
+        "FontSize": 36.0,
+        "GroupStyleId": "00000000-0000-0000-0000-000000000000",
+        "InitialTop": 0.0,
+        "InitialHeight": 0.0,
+        "TextblockHeight": 0.0,
+        "Background": "#FFC1D676",
+        "PinnedNode": "aaa352e804214b2db371ebe2b69239fe"
+      },
+      {
+        "Id": "568d52db4fe04fad815e4e19d479e99d",
+        "Title": "Utilizar o estilo padrão ou um estilo específico ?\n•  O sistema selecina o último modelo de cota usado se optado pelo uso do modelo padrão",
+        "DescriptionText": null,
+        "IsExpanded": true,
+        "WidthAdjustment": 0.0,
+        "HeightAdjustment": 0.0,
+        "Nodes": [],
+        "HasNestedGroups": false,
+        "Left": 3156.6584040379016,
+        "Top": 614.536324494349,
+        "Width": 0.0,
+        "Height": 0.0,
+        "FontSize": 36.0,
+        "GroupStyleId": "00000000-0000-0000-0000-000000000000",
+        "InitialTop": 0.0,
+        "InitialHeight": 0.0,
+        "TextblockHeight": 0.0,
+        "Background": "#FFC1D676",
+        "PinnedNode": "fc4dbd4139b3409db5ed5fe5ded13685"
+      },
+      {
+        "Id": "667c0a52655f47b8a084fb82d30b687f",
+        "Title": "Informe o nome exato do estilo de cota a ser usado se optar por um modelo diferente do padrão\n•  O modelo especificado precisa existir no projeto",
+        "DescriptionText": null,
+        "IsExpanded": true,
+        "WidthAdjustment": 0.0,
+        "HeightAdjustment": 0.0,
+        "Nodes": [],
+        "HasNestedGroups": false,
+        "Left": 2499.261501429904,
+        "Top": 1216.5838536077345,
+        "Width": 0.0,
+        "Height": 0.0,
+        "FontSize": 36.0,
+        "GroupStyleId": "00000000-0000-0000-0000-000000000000",
+        "InitialTop": 0.0,
+        "InitialHeight": 0.0,
+        "TextblockHeight": 0.0,
+        "Background": "#FFC1D676",
+        "PinnedNode": "a54ea15d209a46b5857fa6dad003fa7e"
+      },
+      {
+        "Id": "dc9043d6322045d9891a6e9d97311e16",
+        "Title": "Selecione os dispositivos elétricos a serem cotados\n•  Não misture cotas horizontais com verticais na seleção\n•  Escolha dispositivos sempre com a mesma orientação em relação a da inserção da linha da cota na vista",
+        "DescriptionText": null,
+        "IsExpanded": true,
+        "WidthAdjustment": 0.0,
+        "HeightAdjustment": 0.0,
+        "Nodes": [],
+        "HasNestedGroups": false,
+        "Left": 2796.1705652786513,
+        "Top": -83.606626163812109,
+        "Width": 0.0,
+        "Height": 0.0,
+        "FontSize": 36.0,
+        "GroupStyleId": "00000000-0000-0000-0000-000000000000",
+        "InitialTop": 0.0,
+        "InitialHeight": 0.0,
+        "TextblockHeight": 0.0,
+        "Background": "#FFC1D676",
+        "PinnedNode": "0be62eb641824fa08ad31eb049411a3a"
+      },
+      {
+        "Id": "1d6ef954a7c24904b0602877659a2190",
+        "Title": "OldIff parece executar mais rápido que o If normal",
+        "DescriptionText": null,
+        "IsExpanded": true,
+        "WidthAdjustment": 0.0,
+        "HeightAdjustment": 0.0,
+        "Nodes": [],
+        "HasNestedGroups": false,
+        "Left": 3187.0430005392159,
+        "Top": -599.296937000132,
+        "Width": 0.0,
+        "Height": 0.0,
+        "FontSize": 36.0,
+        "GroupStyleId": "00000000-0000-0000-0000-000000000000",
+        "InitialTop": 0.0,
+        "InitialHeight": 0.0,
+        "TextblockHeight": 0.0,
+        "Background": "#FFC1D676",
+        "PinnedNode": "cd833c686cc24a9da979b4d3abd6844f"
+      },
+      {
+        "Id": "1db43b33066c46b8815e8c105c3d0a05",
+        "Title": "Cria as cotas na vista no ponto de inserção clicado com o mouse após seleção dos dispositivos",
+        "DescriptionText": null,
+        "IsExpanded": true,
+        "WidthAdjustment": 0.0,
+        "HeightAdjustment": 0.0,
+        "Nodes": [],
+        "HasNestedGroups": false,
+        "Left": 4644.6270633884205,
+        "Top": 68.50970010548275,
+        "Width": 0.0,
+        "Height": 0.0,
+        "FontSize": 36.0,
+        "GroupStyleId": "00000000-0000-0000-0000-000000000000",
+        "InitialTop": 0.0,
+        "InitialHeight": 0.0,
+        "TextblockHeight": 0.0,
+        "Background": "#FFC1D676",
+        "PinnedNode": "2db12a9ad36640ebb1016e38b1ea30f3"
+      },
+      {
+        "Id": "9e4f61244c5d431db2145adfbb3d8189",
+        "Title": "Nova nota",
+        "DescriptionText": null,
+        "IsExpanded": true,
+        "WidthAdjustment": 0.0,
+        "HeightAdjustment": 0.0,
+        "Nodes": [],
+        "HasNestedGroups": false,
+        "Left": 7714.41412367097,
+        "Top": 4232.3175159539005,
+        "Width": 0.0,
+        "Height": 0.0,
+        "FontSize": 36.0,
+        "GroupStyleId": "00000000-0000-0000-0000-000000000000",
+        "InitialTop": 0.0,
+        "InitialHeight": 0.0,
+        "TextblockHeight": 0.0,
+        "Background": "#FFC1D676"
+      },
+      {
+        "Id": "8b25e36ba04240848ab723f69d371395",
+        "Title": "Rotina auxiliar de criação de cotas em dispositivos elétricos\n\nEsta rotina tem a intenção de agilizar o lançamento de cotas entre dispositivos elétricos do mesmo tipo evitando-se a necessidade da procura do ponto de alinhamento de cada um em relação a outro e também evita o deslocamento acidental dos mesmos de sua posição original, normalmente ao se clicar com o mouse sobre os mesmos.\n\n•  Executar a rotina pelo ícone da imagem para abrir a tela de configuração dos parâmertos de lançamento \n\n•  Não clique no triângulo da tela que possui a lista minimizada de rotinas Dynamo disponíveis porque é necessário várias configurações para o seu correto funcionamento e também para permitir o seu uso em sequência na seleção de vários blocos de dispositivos com seus devidos alinhamentos e pontos de inserção das linhas das cotas na posição mais adequada da vista aberta.\n\nAntes de clicar no botão \"Executar\" na parte inferior da tela :\n\n•  Selecionar na vista aberta, com o \"clique\" e \"arrastar\" do botão esquerdo do mouse, os dispositivos elétricos do mesmo tipo alinhados em uma mesma direção (em linha ou coluna) e orientação (virados para um mesmo lado).\n•  Escolher se a cota a ser inserida será disposta em uma linha horizontal ou vertical. \n•  A orientação da inserção da cota deve seguir a mesma orientação dos dispositivos selecionados, ou seja, se foram selecionados os dispostos na horizontal, escolher posicionamento da cota em linha horizontal. Se forem selecionados dispostos em uma  linha vertical, escolher posicionamento da cota em linha verical.\n\nEstilo da cota :\n•  Se escolhido o modelo de estilo padrão, a cota a ser inserida usará o último estilo usado no aplicativo (segue o último modelo adotado pelo usuário).\n•  Se optado por um estilo fixo, deve  ser verificado primeiro o seu nome exato, preservando maiúsculas ,minúsculas, espaçamento, caracteres, etc e informar o seu nome no campo do estilo da tela de configuração.\n\nA execução da inserção da cota na planta só deve ser feita depois de seguidos estes passos acima.\n\nManter a tela aberta para selecionar novos agrupamentos de dispositivos em outras orientações, alterando apenas os parâmetros de seu interesse e clicando novamente no botão de Executar da parte inferior da tela para que a linha da cota da seleção de disposisitos seja criada e um novo ciclo de seleção possa ser iniciado.",
+        "DescriptionText": null,
+        "IsExpanded": true,
+        "WidthAdjustment": 0.0,
+        "HeightAdjustment": 0.0,
+        "Nodes": [],
+        "HasNestedGroups": false,
+        "Left": 1633.3644888190036,
+        "Top": -917.71484530603482,
+        "Width": 0.0,
+        "Height": 0.0,
+        "FontSize": 36.0,
+        "GroupStyleId": "00000000-0000-0000-0000-000000000000",
+        "InitialTop": 0.0,
+        "InitialHeight": 0.0,
+        "TextblockHeight": 0.0,
+        "Background": "#FFC1D676"
+      },
+      {
+        "Id": "cceeee3143da4f08ac77e4e3c24f7696",
+        "Title": "Esta rotina possui um nó \"Select Point\" correspondendo a um script personalizado em Python criado com a versão Iron Python 2.7\n\nSe a versão do Python instalada for superior, poderá não funcionar. \n\nNeste caso, clique com o mouse sobre o nó acima e selecione \"Editar\" no menu suspenso para abrir a janela do editor de códigos Python.\n\nNa janela do editor de códigos que se abrirá, selecione na parte inferior a opção do IronPython 2 ao invés da opção Python 3 (ou semelhante).\n\nPode ser que seja necessário carregar o pacote do Iron Python 2.7 se o mesmo não estiver instalado em sua máquina.",
+        "DescriptionText": null,
+        "IsExpanded": true,
+        "WidthAdjustment": 0.0,
+        "HeightAdjustment": 0.0,
+        "Nodes": [],
+        "HasNestedGroups": false,
+        "Left": 1999.8246480430178,
+        "Top": -919.09843489085631,
+        "Width": 0.0,
+        "Height": 0.0,
+        "FontSize": 36.0,
+        "GroupStyleId": "00000000-0000-0000-0000-000000000000",
+        "InitialTop": 0.0,
+        "InitialHeight": 0.0,
+        "TextblockHeight": 0.0,
+        "Background": "#FFC1D676"
+      },
+      {
+        "Id": "92bedcd999c34a9f8d1084c1dc593465",
+        "Title": "Esta rotina utiliza um nó \"OldIf\" do pacote \"Crumple\" ao invés do nó \"If\" dos n´s padrões do Revit. \n\nO pacote \"Crumple\" possi alguns nós que podem estar sendo utilizados em outros scripts e para manter compatibilidade com o nó \"If\" original do Dynamo, este pacote disponibilizou esta rotina alternativa.\n\nSe o nó \"If\" for utilizado e tiver algum comportamento anormal em algum outro script, utilize este nó \"OldIf\" em seu lugar e avalie os resultados.\n\nPor precaução, este script atual está usando o nó de compatibilidade \"OldIf\" porque notou-se uma maior lentidão de execução ao usar o pacote \"If\". \n\nOs dois nós estão funcionando. Porém, foi optado deixar a verão de compatibilidade disponibilizada no pacote do Crumple apenas por segurança.",
+        "DescriptionText": null,
+        "IsExpanded": true,
+        "WidthAdjustment": 0.0,
+        "HeightAdjustment": 0.0,
+        "Nodes": [],
+        "HasNestedGroups": false,
+        "Left": 2353.2127787022996,
+        "Top": -919.99192881333454,
+        "Width": 0.0,
+        "Height": 0.0,
+        "FontSize": 36.0,
+        "GroupStyleId": "00000000-0000-0000-0000-000000000000",
+        "InitialTop": 0.0,
+        "InitialHeight": 0.0,
+        "TextblockHeight": 0.0,
+        "Background": "#FFC1D676"
+      }
+    ],
+    "X": -184.20554170012844,
+    "Y": 182.89016330896709,
+    "Zoom": 0.13813815022607107
+  }
+}
