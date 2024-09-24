@@ -1,0 +1,1397 @@
+{
+  "Uuid": "3c9d0464-8643-5ffe-96e5-ab1769818209",
+  "IsCustomNode": false,
+  "Description": "Adiciona Parâmetros Compartilhados em famílias",
+  "Name": "Adicionar_parametro_compartilhado_em_familia-2",
+  "ElementResolver": {
+    "ResolutionMap": {
+      "DSCore.List": {
+        "Key": "DSCore.List",
+        "Value": "DSCoreNodes.dll"
+      }
+    }
+  },
+  "Inputs": [
+    {
+      "Id": "f26dbe978544418eb6ea8e9079bbefe7",
+      "Name": "1 - Arquivo de parâmetros do Excel",
+      "Type": "string",
+      "Type2": "string",
+      "Value": ".\\SharedParams.xlsx",
+      "Description": "Permite selecionar um arquivo no sistema e retornar seu caminho",
+      "SelectedIndex": 0
+    },
+    {
+      "Id": "259f867d13394156b83e49bb6827d27b",
+      "Name": "4 - SpecType",
+      "Type": "selection",
+      "Type2": "dropdownSelection",
+      "Value": "autodesk.spec:spec.string",
+      "Description": "Selecione um tipo de especificação.",
+      "SelectedIndex": 146
+    },
+    {
+      "Id": "4b255506f73a4d199af42aa73b6ddc1e",
+      "Name": "5 - GroupType",
+      "Type": "selection",
+      "Type2": "dropdownSelection",
+      "Value": "autodesk.parameter.group:identityData",
+      "Description": "Selecione um tipo de grupo.",
+      "SelectedIndex": 30
+    },
+    {
+      "Id": "55049bd4956746818b6a83a0dde7120d",
+      "Name": "3 - Nome do grupo comum",
+      "Type": "string",
+      "Type2": "string",
+      "Value": "Aux2",
+      "Description": "Cria uma sequência de caracteres.",
+      "SelectedIndex": 0
+    },
+    {
+      "Id": "c0993cb729484299803033ae90889849",
+      "Name": "2 - Nome de Grupo Comum  ?",
+      "Type": "boolean",
+      "Type2": "boolean",
+      "Value": "true",
+      "Description": "Permite a seleção entre True e False",
+      "SelectedIndex": 0
+    }
+  ],
+  "Outputs": [],
+  "Nodes": [
+    {
+      "ConcreteType": "CoreNodeModels.Input.Filename, CoreNodeModels",
+      "HintPath": "C:\\Users\\PSystems\\Documents\\Dynamo\\Cascelli\\13-Adicionar-parametros-compartilhados-em-familias\\SharedParams.xlsx",
+      "InputValue": ".\\SharedParams.xlsx",
+      "NodeType": "ExtensionNode",
+      "Id": "f26dbe978544418eb6ea8e9079bbefe7",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "c9f251e4f01446e5b12a7589e3a8877f",
+          "Name": "",
+          "Description": "Filename",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Permite selecionar um arquivo no sistema e retornar seu caminho"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CodeBlockNodeModel, DynamoCore",
+      "NodeType": "CodeBlockNode",
+      "Code": "\"Standard\";\nfalse;",
+      "Id": "2bc321cfce4b4381882868ebdffed586",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "6366318bc81c4f66b8ddc1250e8cb150",
+          "Name": "",
+          "Description": "Valor da expressão na linha 1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "9c5bf0dbb22f481ca60c3d43d4c99076",
+          "Name": "",
+          "Description": "Valor da expressão na linha 2",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Permite que o código DesignScript seja criado diretamente"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CodeBlockNodeModel, DynamoCore",
+      "NodeType": "CodeBlockNode",
+      "Code": "//Process excel data\n\n// Descarta primeiro item da lista (Cabeçalhos)\ndropped = DSCore.List.DropItems(data, 1);\n\n// Transpõe lista - Troca linha por coluna\ndata_t  = DSCore.List.Transpose(dropped);\n\n//Values for SP node\n\n//Obtém valores das colunas\n// Correspondente aos valores\n// de cada índice da lista\n\n// Parameter Name\nsp_nmes   = data_t[0];\n\n// Group name\nsp_grps   = data_t[1];\n\n//Spec Type\np_types   = data_t[2];\n\n// Parameter Group\np_BIpgs   = data_t[4];\n\n// Instance Parameter ?\np_inst    = data_t[5] == \"Yes\";\n\n// Report Parameter ?\np_rept    = data_t[6] == \"Yes\";",
+      "Id": "94fbc5e825964cdbad5a9790a49657d6",
+      "Inputs": [
+        {
+          "Id": "3e6a69fc09bb40a9b4ad56d6714bdc6e",
+          "Name": "data",
+          "Description": "data",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "770df8f15a814ad7a632c0b8e49b9563",
+          "Name": "",
+          "Description": "dropped",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "52905f3b5fa9433cbfa3259e230b5ba8",
+          "Name": "",
+          "Description": "data_t",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "96eacf75a1574324b9c0f663656e74b5",
+          "Name": "",
+          "Description": "sp_nmes",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "bbb7dc8bb12f4eb186083e24d0ca181c",
+          "Name": "",
+          "Description": "sp_grps",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "da9453e1ef024175a60cf9db37fc341c",
+          "Name": "",
+          "Description": "p_types",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "c14c4b6739ca44f5b050e8e6dc31604a",
+          "Name": "",
+          "Description": "p_BIpgs",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "fcc2764177f941ba9f63aa13df23e4b7",
+          "Name": "",
+          "Description": "p_inst",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "00e5062211a447d5b1cba4d142e3e83e",
+          "Name": "",
+          "Description": "p_rept",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Permite que o código DesignScript seja criado diretamente"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Watch, CoreNodeModels",
+      "NodeType": "ExtensionNode",
+      "Id": "136bf292dbec4391967508698a1f323f",
+      "Inputs": [
+        {
+          "Id": "477bf8c5c64b4f9996856fff653324d0",
+          "Name": "",
+          "Description": "Nó do qual a saída é exibida",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "5446347c55d1409383618d218047f34e",
+          "Name": "",
+          "Description": "Saída do nó",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Visualizar a saída do nó"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Watch, CoreNodeModels",
+      "NodeType": "ExtensionNode",
+      "Id": "9e5f6f9352cf4a6bb866baa4216ed983",
+      "Inputs": [
+        {
+          "Id": "cad37308200140e3888c9bdbe6fceea4",
+          "Name": "",
+          "Description": "Nó do qual a saída é exibida",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "7156fcda35d340af9cf71045510fdead",
+          "Name": "",
+          "Description": "Saída do nó",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Visualizar a saída do nó"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Watch, CoreNodeModels",
+      "NodeType": "ExtensionNode",
+      "Id": "474d4e003e974dc88175a4e14b495d4b",
+      "Inputs": [
+        {
+          "Id": "3a6d86016663461db3beb2fa4ca4f1d4",
+          "Name": "",
+          "Description": "Nó do qual a saída é exibida",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "df4fbacf1e42480a8bea65cd8f12a0ab",
+          "Name": "",
+          "Description": "Saída do nó",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Visualizar a saída do nó"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Watch, CoreNodeModels",
+      "NodeType": "ExtensionNode",
+      "Id": "d6d8dceea76b4f2aa22467bd0a7d6199",
+      "Inputs": [
+        {
+          "Id": "9b5e8dec611e4fb2856a677ea99a05fe",
+          "Name": "",
+          "Description": "Nó do qual a saída é exibida",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "95efc5b8ea114c3b821aaa314a81543a",
+          "Name": "",
+          "Description": "Saída do nó",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Visualizar a saída do nó"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Watch, CoreNodeModels",
+      "NodeType": "ExtensionNode",
+      "Id": "9d6097192c56485abef32163fde9a06f",
+      "Inputs": [
+        {
+          "Id": "c6d4b7e911044e7eb4c121fe1de4a18c",
+          "Name": "",
+          "Description": "Nó do qual a saída é exibida",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "a4d2e4f1cec54944b704e7c89daf4dbe",
+          "Name": "",
+          "Description": "Saída do nó",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Visualizar a saída do nó"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Watch, CoreNodeModels",
+      "NodeType": "ExtensionNode",
+      "Id": "3fe53152d3994de296bb9bc601bffe84",
+      "Inputs": [
+        {
+          "Id": "376bcf1560874cd590b6be59500cb3fe",
+          "Name": "",
+          "Description": "Nó do qual a saída é exibida",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "1b09a01a533843f9bf79eeb7492cf7b6",
+          "Name": "",
+          "Description": "Saída do nó",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Visualizar a saída do nó"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "DSOffice.Data.OpenXMLImportExcel@string,string,int,int,bool",
+      "Id": "6778b2c6ce6b4588b790a8b514079ddf",
+      "Inputs": [
+        {
+          "Id": "89f243dc423746b18c79f50a3e0594ef",
+          "Name": "filePath",
+          "Description": "Arquivo representando a pasta de trabalho do Excel\n\nstring",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "ecd7d638c95744bbbbf62aa8fe35c08d",
+          "Name": "sheetName",
+          "Description": "Nome da planilha contendo os dados\n\nstring",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "adaab88efc5f46529d6642338bbe745f",
+          "Name": "startRow",
+          "Description": "Linha inicial para ler os dados. Insira 0 para a linha 1, 1 para a linha 2 etc.\n\nint\nValor padrão : 0",
+          "UsingDefaultValue": true,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "1db559e895e140b98c0b8e238c323eb8",
+          "Name": "startColumn",
+          "Description": "Coluna inicial para ler os dados. Insira 0 para a coluna A, 1 para a coluna B etc.\n\nint\nValor padrão : 0",
+          "UsingDefaultValue": true,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "841034ebdf19475d9b51a22499610846",
+          "Name": "readAsString",
+          "Description": "Ativar/desativar para ler as células como sequências de caracteres\n\nbool\nValor padrão : false",
+          "UsingDefaultValue": true,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "54583d41196f46f8b2df02f6799c7b7f",
+          "Name": "data",
+          "Description": "Linhas de dados na planilha do Excel",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Ler dados de uma planilha do Microsoft Excel usando o padrão Open XML. Os dados são lidos por linha e retornados em uma série de listas por linha. As linhas e colunas são indexadas com zero; por exemplo, o valor na célula A1 aparecerá na lista de dados em [0,0].\n\nData.OpenXMLImportExcel (filePath: string, sheetName: string, startRow: int = 0, startColumn: int = 0, readAsString: bool = false): var[][]"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Watch, CoreNodeModels",
+      "NodeType": "ExtensionNode",
+      "Id": "4ea84ba3fbe14e93a80b42ee6301fac9",
+      "Inputs": [
+        {
+          "Id": "471f9d04f4a54baab365177ebe16597e",
+          "Name": "",
+          "Description": "Nó do qual a saída é exibida",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "5ef101bf899247c38d50ec461eb5354e",
+          "Name": "",
+          "Description": "Saída do nó",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Visualizar a saída do nó"
+    },
+    {
+      "ConcreteType": "DSRevitNodesUI.SpecTypes, DSRevitNodesUI",
+      "SelectedIndex": 146,
+      "SelectedString": "autodesk.spec:spec.string",
+      "NodeType": "ExtensionNode",
+      "Id": "259f867d13394156b83e49bb6827d27b",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "7d43a2b9bdc44de3b3d914f703eea81e",
+          "Name": "SpecType",
+          "Description": "O SpecType selecionado",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Selecione um tipo de especificação."
+    },
+    {
+      "ConcreteType": "DSRevitNodesUI.GroupTypes, DSRevitNodesUI",
+      "SelectedIndex": 30,
+      "SelectedString": "autodesk.parameter.group:identityData",
+      "NodeType": "ExtensionNode",
+      "Id": "4b255506f73a4d199af42aa73b6ddc1e",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "6b9cbae087d44732b856743a481298e3",
+          "Name": "GroupType",
+          "Description": "O GroupType selecionado",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Selecione um tipo de grupo."
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Revit.Elements.Parameter.CreateSharedParameterForAllCategories@string,string,Revit.Elements.SpecType,Revit.Elements.GroupType,bool",
+      "Id": "d66104e3de964715a4a566424aef5884",
+      "Inputs": [
+        {
+          "Id": "97b451e5c53249fabed9f8c0b347f420",
+          "Name": "parameterName",
+          "Description": "Nome\n\nstring",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "48286469177c40898f2a9a8f41ca231f",
+          "Name": "groupName",
+          "Description": "Grupo do parâmetro dos parâmetros compartilhados\n\nstring",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "7bcb76dfa8f84144b5c13d04533de61b",
+          "Name": "specType",
+          "Description": "Tipo do novo parâmetro.\n\nSpecType",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "f0576110941b4de18a7ba822f1c914f2",
+          "Name": "groupType",
+          "Description": "Tipo do grupo ao qual o parâmetro pertence.\n\nGroupType",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "58451d22fd6a4f54a214425a08aca88e",
+          "Name": "instance",
+          "Description": "Verdadeiro se for um parâmetro de instância. Caso contrário, é um parâmetro de tipo\n\nbool",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "46acb4f80bf14f3fa3aa60a575422633",
+          "Name": "void",
+          "Description": "void",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Criar um novo parâmetro compartilhado no documento atual do Revit para todas as categorias aplicáveis\n\nParameter.CreateSharedParameterForAllCategories (parameterName: string, groupName: string, specType: SpecType, groupType: GroupType, instance: bool): void"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.StringInput, CoreNodeModels",
+      "NodeType": "StringInputNode",
+      "InputValue": "Aux2",
+      "Id": "55049bd4956746818b6a83a0dde7120d",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "3a1467cd9a824711999da40b44f2bb88",
+          "Name": "",
+          "Description": "String",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Cria uma sequência de caracteres."
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.BoolSelector, CoreNodeModels",
+      "NodeType": "BooleanInputNode",
+      "InputValue": true,
+      "Id": "c0993cb729484299803033ae90889849",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "42b73e0ca94446b3adc632ea231c4b41",
+          "Name": "",
+          "Description": "Boolean",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Permite a seleção entre True e False"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CodeBlockNodeModel, DynamoCore",
+      "NodeType": "CodeBlockNode",
+      "Code": "// GroupName\n// Usar nome especifico\n//  para cada parametrro\n//  do excel ?\nOrigemExcel == true ?\n\n// Encaminha dados do Excel\ndados_excel :\n\n// Encaminha nome de grup único\ngroupName;",
+      "Id": "8eee3eaf82724fd48303934567cefc90",
+      "Inputs": [
+        {
+          "Id": "bd44d8fe545c43e093c6a75c3edf3645",
+          "Name": "OrigemExcel",
+          "Description": "OrigemExcel",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "1dc6b614534b4351be10c51c400423dd",
+          "Name": "dados_excel",
+          "Description": "dados_excel",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "bdec2ad3b7ae4c378d9f1e5bf190a84d",
+          "Name": "groupName",
+          "Description": "groupName",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "126ca36b51a4412da9435d4af4f1f385",
+          "Name": "",
+          "Description": "Valor da expressão na linha 5",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Permite que o código DesignScript seja criado diretamente"
+    }
+  ],
+  "Connectors": [
+    {
+      "Start": "c9f251e4f01446e5b12a7589e3a8877f",
+      "End": "89f243dc423746b18c79f50a3e0594ef",
+      "Id": "10de572136de4278868797bb221dd3fc",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "6366318bc81c4f66b8ddc1250e8cb150",
+      "End": "ecd7d638c95744bbbbf62aa8fe35c08d",
+      "Id": "02b5d14541b042b69d4ea38c76a83087",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "9c5bf0dbb22f481ca60c3d43d4c99076",
+      "End": "841034ebdf19475d9b51a22499610846",
+      "Id": "fe6016d4f3444cd59912d15a7d8b2a33",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "770df8f15a814ad7a632c0b8e49b9563",
+      "End": "471f9d04f4a54baab365177ebe16597e",
+      "Id": "8a6d1d1a76af412fbbd7510e1ced6de9",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "96eacf75a1574324b9c0f663656e74b5",
+      "End": "477bf8c5c64b4f9996856fff653324d0",
+      "Id": "e1cdaf28d05e4e38ad3f128ed73f314e",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "96eacf75a1574324b9c0f663656e74b5",
+      "End": "97b451e5c53249fabed9f8c0b347f420",
+      "Id": "32c8cbd7de77478292c6ce2cce49751f",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "bbb7dc8bb12f4eb186083e24d0ca181c",
+      "End": "cad37308200140e3888c9bdbe6fceea4",
+      "Id": "638572ec3c75427094f2977de79d8873",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "bbb7dc8bb12f4eb186083e24d0ca181c",
+      "End": "1dc6b614534b4351be10c51c400423dd",
+      "Id": "d1d91021510548948cc0fdc87e3462fc",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "da9453e1ef024175a60cf9db37fc341c",
+      "End": "3a6d86016663461db3beb2fa4ca4f1d4",
+      "Id": "f2233829595842fa95d56df0917aa86f",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "c14c4b6739ca44f5b050e8e6dc31604a",
+      "End": "9b5e8dec611e4fb2856a677ea99a05fe",
+      "Id": "14733e5f366a4043b12151abf58099b5",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "fcc2764177f941ba9f63aa13df23e4b7",
+      "End": "c6d4b7e911044e7eb4c121fe1de4a18c",
+      "Id": "8828d16252044216a6b53df66313ba04",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "fcc2764177f941ba9f63aa13df23e4b7",
+      "End": "58451d22fd6a4f54a214425a08aca88e",
+      "Id": "03f95b11c68845a189f8a1650a34885d",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "00e5062211a447d5b1cba4d142e3e83e",
+      "End": "376bcf1560874cd590b6be59500cb3fe",
+      "Id": "bcc0fe8ded774d6ca45fb820d4ba5e2e",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "54583d41196f46f8b2df02f6799c7b7f",
+      "End": "3e6a69fc09bb40a9b4ad56d6714bdc6e",
+      "Id": "7d2c63f47630431596886cf40bab91ad",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "7d43a2b9bdc44de3b3d914f703eea81e",
+      "End": "7bcb76dfa8f84144b5c13d04533de61b",
+      "Id": "001a72f2b01a46978bb39848b33fdaeb",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "6b9cbae087d44732b856743a481298e3",
+      "End": "f0576110941b4de18a7ba822f1c914f2",
+      "Id": "a65b6e1aea824f5fb4bc0f26115a64de",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "3a1467cd9a824711999da40b44f2bb88",
+      "End": "bdec2ad3b7ae4c378d9f1e5bf190a84d",
+      "Id": "c42b44af17bc46ca9647c1350b40bdff",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "42b73e0ca94446b3adc632ea231c4b41",
+      "End": "bd44d8fe545c43e093c6a75c3edf3645",
+      "Id": "b244a966a5d345ef9feda9a80914bd90",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "126ca36b51a4412da9435d4af4f1f385",
+      "End": "48286469177c40898f2a9a8f41ca231f",
+      "Id": "83e09ac07ab7458e9f35df26e2d5f05b",
+      "IsHidden": "False"
+    }
+  ],
+  "Dependencies": [],
+  "NodeLibraryDependencies": [],
+  "Thumbnail": "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",
+  "GraphDocumentationURL": null,
+  "ExtensionWorkspaceData": [
+    {
+      "ExtensionGuid": "28992e1d-abb9-417f-8b1b-05e053bee670",
+      "Name": "Propriedades",
+      "Version": "2.17",
+      "Data": {}
+    },
+    {
+      "ExtensionGuid": "DFBD9CC0-DB40-457A-939E-8C8555555A9D",
+      "Name": "Generative Design",
+      "Version": "4.0",
+      "Data": {}
+    }
+  ],
+  "Author": "None provided",
+  "Linting": {
+    "activeLinter": "Nenhum",
+    "activeLinterId": "7b75fb44-43fd-4631-a878-29f4d5d8399a",
+    "warningCount": 0,
+    "errorCount": 0
+  },
+  "Bindings": [],
+  "View": {
+    "Dynamo": {
+      "ScaleFactor": 1.0,
+      "HasRunWithoutCrash": true,
+      "IsVisibleInDynamoLibrary": true,
+      "Version": "2.17.0.3472",
+      "RunType": "Manual",
+      "RunPeriod": "1000"
+    },
+    "Camera": {
+      "Name": "_Visualização do plano de fundo",
+      "EyeX": -17.0,
+      "EyeY": 24.0,
+      "EyeZ": 50.0,
+      "LookX": 12.0,
+      "LookY": -13.0,
+      "LookZ": -58.0,
+      "UpX": 0.0,
+      "UpY": 1.0,
+      "UpZ": 0.0
+    },
+    "ConnectorPins": [],
+    "NodeViews": [
+      {
+        "Name": "1 - Arquivo de parâmetros do Excel",
+        "ShowGeometry": true,
+        "Id": "f26dbe978544418eb6ea8e9079bbefe7",
+        "IsSetAsInput": true,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": -1508.7138138942489,
+        "Y": 125.65562544442241
+      },
+      {
+        "Name": "Code Block",
+        "ShowGeometry": true,
+        "Id": "2bc321cfce4b4381882868ebdffed586",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": -1072.7514630793639,
+        "Y": 303.649132118137
+      },
+      {
+        "Name": "Code Block",
+        "ShowGeometry": true,
+        "Id": "94fbc5e825964cdbad5a9790a49657d6",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": -274.92487444077994,
+        "Y": 72.025931107201984
+      },
+      {
+        "Name": "Parameter Name",
+        "ShowGeometry": true,
+        "Id": "136bf292dbec4391967508698a1f323f",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 971.921438995688,
+        "Y": -878.808743407763
+      },
+      {
+        "Name": "Group Name",
+        "ShowGeometry": true,
+        "Id": "9e5f6f9352cf4a6bb866baa4216ed983",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1516.20957887038,
+        "Y": -878.808743407763
+      },
+      {
+        "Name": "Spec Type",
+        "ShowGeometry": true,
+        "Id": "474d4e003e974dc88175a4e14b495d4b",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": true,
+        "X": 2088.81018275825,
+        "Y": -878.808743407763
+      },
+      {
+        "Name": "Parameter Group",
+        "ShowGeometry": true,
+        "Id": "d6d8dceea76b4f2aa22467bd0a7d6199",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": true,
+        "X": 977.819954901611,
+        "Y": -423.465959773845
+      },
+      {
+        "Name": "Instance Parameter",
+        "ShowGeometry": true,
+        "Id": "9d6097192c56485abef32163fde9a06f",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": true,
+        "X": 1522.1080947763,
+        "Y": -423.465959773845
+      },
+      {
+        "Name": "Report Parameter",
+        "ShowGeometry": true,
+        "Id": "3fe53152d3994de296bb9bc601bffe84",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": true,
+        "X": 2094.70869866417,
+        "Y": -423.465959773845
+      },
+      {
+        "Name": "Data.OpenXMLImportExcel",
+        "ShowGeometry": true,
+        "Id": "6778b2c6ce6b4588b790a8b514079ddf",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": -736.72271437806535,
+        "Y": 125.65562544442241
+      },
+      {
+        "Name": "Dados recebidos, sem o cabeçalho",
+        "ShowGeometry": true,
+        "Id": "4ea84ba3fbe14e93a80b42ee6301fac9",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": true,
+        "X": 973.599107249757,
+        "Y": -1235.47424140265
+      },
+      {
+        "Name": "4 - SpecType",
+        "ShowGeometry": true,
+        "Id": "259f867d13394156b83e49bb6827d27b",
+        "IsSetAsInput": true,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1438.2488184563292,
+        "Y": 1282.0977469883919
+      },
+      {
+        "Name": "5 - GroupType",
+        "ShowGeometry": true,
+        "Id": "4b255506f73a4d199af42aa73b6ddc1e",
+        "IsSetAsInput": true,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1417.2488184563292,
+        "Y": 1512.1324320312851
+      },
+      {
+        "Name": "Parameter.CreateSharedParameterForAllCategories",
+        "ShowGeometry": true,
+        "Id": "d66104e3de964715a4a566424aef5884",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 2362.7464395871266,
+        "Y": 300.87231996288443
+      },
+      {
+        "Name": "3 - Nome do grupo comum",
+        "ShowGeometry": true,
+        "Id": "55049bd4956746818b6a83a0dde7120d",
+        "IsSetAsInput": true,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 967.39404996127109,
+        "Y": 916.07426873815609
+      },
+      {
+        "Name": "2 - Nome de Grupo Comum  ?",
+        "ShowGeometry": true,
+        "Id": "c0993cb729484299803033ae90889849",
+        "IsSetAsInput": true,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 967.39404996127109,
+        "Y": 657.6944475460989
+      },
+      {
+        "Name": "Code Block",
+        "ShowGeometry": true,
+        "Id": "8eee3eaf82724fd48303934567cefc90",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1348.2488184563292,
+        "Y": 745.31192405552213
+      }
+    ],
+    "Annotations": [
+      {
+        "Id": "77b45dd90b244448a8e9e5c5237c4fc1",
+        "Title": "Obtém valores da lista",
+        "DescriptionText": "Obtém dados específicos de cada coluna da lista descartando o primeiro (cabeçalho)",
+        "IsExpanded": true,
+        "WidthAdjustment": 0.0,
+        "HeightAdjustment": 0.0,
+        "Nodes": [
+          "94fbc5e825964cdbad5a9790a49657d6",
+          "498c1a5ab0dd4b22a69449873e8dd4d4"
+        ],
+        "HasNestedGroups": false,
+        "Left": -284.92487444077994,
+        "Top": -58.974068892798016,
+        "Width": 519.0,
+        "Height": 747.0,
+        "FontSize": 36.0,
+        "GroupStyleId": "00000000-0000-0000-0000-000000000000",
+        "InitialTop": 14.025931107201984,
+        "InitialHeight": 145.0,
+        "TextblockHeight": 63.0,
+        "Background": "#FF48B9FF"
+      },
+      {
+        "Id": "01630f822f17493a9678eb29013b6a48",
+        "Title": "Observadores dos valores obtidos ",
+        "DescriptionText": "Estebloco serve apenas para vaisualização dos dos valores obbtidos da da planilha do Excel",
+        "IsExpanded": true,
+        "WidthAdjustment": 115.25202988397405,
+        "HeightAdjustment": 298.78664846893071,
+        "Nodes": [
+          "136bf292dbec4391967508698a1f323f",
+          "9e5f6f9352cf4a6bb866baa4216ed983",
+          "474d4e003e974dc88175a4e14b495d4b",
+          "d6d8dceea76b4f2aa22467bd0a7d6199",
+          "9d6097192c56485abef32163fde9a06f",
+          "3fe53152d3994de296bb9bc601bffe84",
+          "4ea84ba3fbe14e93a80b42ee6301fac9"
+        ],
+        "HasNestedGroups": false,
+        "Left": 961.921438995688,
+        "Top": -1308.47424140265,
+        "Width": 1535.0392895524558,
+        "Height": 1319.7949300977357,
+        "FontSize": 36.0,
+        "GroupStyleId": "00000000-0000-0000-0000-000000000000",
+        "InitialTop": -1235.47424140265,
+        "InitialHeight": 957.008281628808,
+        "TextblockHeight": 63.0,
+        "Background": "#FFD4B6DB"
+      },
+      {
+        "Id": "66ed9a3a59fb48a4bba61fb14888972d",
+        "Title": "Adicionar parâmetros compartilhados em famílias",
+        "DescriptionText": "",
+        "IsExpanded": true,
+        "WidthAdjustment": 1.0605581887499511,
+        "HeightAdjustment": 8.8032141492464,
+        "Nodes": [
+          "62dbe3b1a90442a3ad99cfc9b2dd032d",
+          "1cba2923d5104cfb92e4042a2c9e62fa",
+          "13f8b8956e4d4507810dafa6b82aa1cc"
+        ],
+        "HasNestedGroups": false,
+        "Left": -1501.1221158197784,
+        "Top": -1297.1354430276251,
+        "Width": 966.01044059665992,
+        "Height": 735.8032141492464,
+        "FontSize": 36.0,
+        "GroupStyleId": "00000000-0000-0000-0000-000000000000",
+        "InitialTop": -1224.1354430276251,
+        "InitialHeight": 173.132077578315,
+        "TextblockHeight": 63.0,
+        "Background": "#FFD8D8D8"
+      },
+      {
+        "Id": "312408c5be6644348580efe30e54a78a",
+        "Title": "Cria os parâmetros compartilhados",
+        "DescriptionText": "",
+        "IsExpanded": true,
+        "WidthAdjustment": 0.0,
+        "HeightAdjustment": 0.0,
+        "Nodes": [
+          "259f867d13394156b83e49bb6827d27b",
+          "4b255506f73a4d199af42aa73b6ddc1e",
+          "d66104e3de964715a4a566424aef5884",
+          "55049bd4956746818b6a83a0dde7120d",
+          "c0993cb729484299803033ae90889849",
+          "8eee3eaf82724fd48303934567cefc90",
+          "c9c7696455724e1c9113d7d96379c049",
+          "601f87b4295647228dc72af2c813a4a0",
+          "7897cc2cd2c446a4a48994e2eb51167c",
+          "93e2bc0a3bd847918cfae8e789dfcad2",
+          "e7306f8a851e4c68bd9123782d405bbe",
+          "0cd2eaa2a925425f94da9fc899aeb5a0"
+        ],
+        "HasNestedGroups": false,
+        "Left": 950.89404996127109,
+        "Top": 154.87231996288443,
+        "Width": 1877.8523896258555,
+        "Height": 1489.2601120684008,
+        "FontSize": 36.0,
+        "GroupStyleId": "00000000-0000-0000-0000-000000000000",
+        "InitialTop": 227.87231996288443,
+        "InitialHeight": 1446.2601120684008,
+        "TextblockHeight": 63.0,
+        "Background": "#FFFFAA45"
+      },
+      {
+        "Id": "8fe4425dbfd74cd78f4501a0116bc74f",
+        "Title": "Importa dados do Excel",
+        "DescriptionText": "",
+        "IsExpanded": true,
+        "WidthAdjustment": 0.0,
+        "HeightAdjustment": 0.0,
+        "Nodes": [
+          "f26dbe978544418eb6ea8e9079bbefe7",
+          "2bc321cfce4b4381882868ebdffed586",
+          "6778b2c6ce6b4588b790a8b514079ddf",
+          "fda5d86e0535411bad2d31801073f23d",
+          "cff7aac5baa14efb82f544214dd1530f"
+        ],
+        "HasNestedGroups": false,
+        "Left": -1518.7138138942489,
+        "Top": -20.344374555577588,
+        "Width": 1065.9910995161836,
+        "Height": 465.99350667371459,
+        "FontSize": 36.0,
+        "GroupStyleId": "00000000-0000-0000-0000-000000000000",
+        "InitialTop": 52.655625444422412,
+        "InitialHeight": 370.0,
+        "TextblockHeight": 63.0,
+        "Background": "#FFC1D676"
+      },
+      {
+        "Id": "c9c7696455724e1c9113d7d96379c049",
+        "Title": "Defina o GroupType dos parâmetros",
+        "DescriptionText": null,
+        "IsExpanded": true,
+        "WidthAdjustment": 0.0,
+        "HeightAdjustment": 0.0,
+        "Nodes": [],
+        "HasNestedGroups": false,
+        "Left": 1449.7488184563292,
+        "Top": 1462.1324320312851,
+        "Width": 0.0,
+        "Height": 0.0,
+        "FontSize": 36.0,
+        "GroupStyleId": "00000000-0000-0000-0000-000000000000",
+        "InitialTop": 0.0,
+        "InitialHeight": 0.0,
+        "TextblockHeight": 0.0,
+        "Background": "#FFC1D676",
+        "PinnedNode": "4b255506f73a4d199af42aa73b6ddc1e"
+      },
+      {
+        "Id": "601f87b4295647228dc72af2c813a4a0",
+        "Title": "Defina o nome do grupo comum dos parâmetros",
+        "DescriptionText": null,
+        "IsExpanded": true,
+        "WidthAdjustment": 0.0,
+        "HeightAdjustment": 0.0,
+        "Nodes": [],
+        "HasNestedGroups": false,
+        "Left": 960.89404996127109,
+        "Top": 866.07426873815609,
+        "Width": 0.0,
+        "Height": 0.0,
+        "FontSize": 36.0,
+        "GroupStyleId": "00000000-0000-0000-0000-000000000000",
+        "InitialTop": 0.0,
+        "InitialHeight": 0.0,
+        "TextblockHeight": 0.0,
+        "Background": "#FFC1D676",
+        "PinnedNode": "55049bd4956746818b6a83a0dde7120d"
+      },
+      {
+        "Id": "7897cc2cd2c446a4a48994e2eb51167c",
+        "Title": "Defina o SpecType do grupo de parâmetros",
+        "DescriptionText": null,
+        "IsExpanded": true,
+        "WidthAdjustment": 0.0,
+        "HeightAdjustment": 0.0,
+        "Nodes": [],
+        "HasNestedGroups": false,
+        "Left": 1430.2488184563292,
+        "Top": 1232.0977469883919,
+        "Width": 0.0,
+        "Height": 0.0,
+        "FontSize": 36.0,
+        "GroupStyleId": "00000000-0000-0000-0000-000000000000",
+        "InitialTop": 0.0,
+        "InitialHeight": 0.0,
+        "TextblockHeight": 0.0,
+        "Background": "#FFC1D676",
+        "PinnedNode": "259f867d13394156b83e49bb6827d27b"
+      },
+      {
+        "Id": "fda5d86e0535411bad2d31801073f23d",
+        "Title": "Nome da folha/sheet da planilha",
+        "DescriptionText": null,
+        "IsExpanded": true,
+        "WidthAdjustment": 0.0,
+        "HeightAdjustment": 0.0,
+        "Nodes": [],
+        "HasNestedGroups": false,
+        "Left": -1085.7514630793639,
+        "Top": 253.649132118137,
+        "Width": 0.0,
+        "Height": 0.0,
+        "FontSize": 36.0,
+        "GroupStyleId": "00000000-0000-0000-0000-000000000000",
+        "InitialTop": 0.0,
+        "InitialHeight": 0.0,
+        "TextblockHeight": 0.0,
+        "Background": "#FFC1D676",
+        "PinnedNode": "2bc321cfce4b4381882868ebdffed586"
+      },
+      {
+        "Id": "cff7aac5baa14efb82f544214dd1530f",
+        "Title": "Localize a planilha do Excel contendo os parâmetros compartilhados a serem criados",
+        "DescriptionText": null,
+        "IsExpanded": true,
+        "WidthAdjustment": 0.0,
+        "HeightAdjustment": 0.0,
+        "Nodes": [],
+        "HasNestedGroups": false,
+        "Left": -1490.2138138942489,
+        "Top": 60.655625444422412,
+        "Width": 0.0,
+        "Height": 0.0,
+        "FontSize": 36.0,
+        "GroupStyleId": "00000000-0000-0000-0000-000000000000",
+        "InitialTop": 0.0,
+        "InitialHeight": 0.0,
+        "TextblockHeight": 0.0,
+        "Background": "#FFC1D676",
+        "PinnedNode": "f26dbe978544418eb6ea8e9079bbefe7"
+      },
+      {
+        "Id": "93e2bc0a3bd847918cfae8e789dfcad2",
+        "Title": "Cria os parâmetros compartilhados para todas as categorias",
+        "DescriptionText": null,
+        "IsExpanded": true,
+        "WidthAdjustment": 0.0,
+        "HeightAdjustment": 0.0,
+        "Nodes": [],
+        "HasNestedGroups": false,
+        "Left": 2449.2464395871266,
+        "Top": 235.87231996288443,
+        "Width": 0.0,
+        "Height": 0.0,
+        "FontSize": 36.0,
+        "GroupStyleId": "00000000-0000-0000-0000-000000000000",
+        "InitialTop": 0.0,
+        "InitialHeight": 0.0,
+        "TextblockHeight": 0.0,
+        "Background": "#FFC1D676",
+        "PinnedNode": "d66104e3de964715a4a566424aef5884"
+      },
+      {
+        "Id": "e7306f8a851e4c68bd9123782d405bbe",
+        "Title": "Defina se será criado um grupo único para todos os parâmetros ou específicos para cada parâmetro  informado na planilha do Excel de entrada",
+        "DescriptionText": null,
+        "IsExpanded": true,
+        "WidthAdjustment": 0.0,
+        "HeightAdjustment": 0.0,
+        "Nodes": [],
+        "HasNestedGroups": false,
+        "Left": 962.89404996127109,
+        "Top": 578.6944475460989,
+        "Width": 0.0,
+        "Height": 0.0,
+        "FontSize": 36.0,
+        "GroupStyleId": "00000000-0000-0000-0000-000000000000",
+        "InitialTop": 0.0,
+        "InitialHeight": 0.0,
+        "TextblockHeight": 0.0,
+        "Background": "#FFC1D676",
+        "PinnedNode": "c0993cb729484299803033ae90889849"
+      },
+      {
+        "Id": "62dbe3b1a90442a3ad99cfc9b2dd032d",
+        "Title": "Esta rotina foi derivada de outra mais antiga que usava uma planilha do excel com campos necessários a sua criação original bem mais flexível do que a atrual.\n\nAlguns nodes da rotina antiga se tornaram obsoletos e não estão mais disponíveis nos pacotes atuais.\n\nEsta rotina atual é uma simplificação da original que previa a criação de : \n\n•  Nome dos parâmetros\n•  Nome do Grupo de cada parâmetro\n•  SpecTypede cada parâmetro\n•  GroupType de cada parâmetro\n•  Se o parâmetro é de tipo ou instância\n•  Se o parâmetro é de relatório/listagem\n\nEsta rotina prevê a criação de  :\n\n•  Nome do parâmetro\n•  Nome do Grupo único ou distinto\n•  SpecType única\n•  GroupType único\n•  Se parâmetro de tipo ou instância\n\nEntretanto : \n\n•  O nome do Grupo dos parâmetros pode ser único ou individualmente defininido em cada linha da planilha do excel (O usuário precisa definir ao executar a rotina e especificar o seu nome único, se assim o desejar).\n•  SpecType único para todos os parâmetros a ser difinido antes da execução da rotina\n•  GrpoupType único para todos os parâmetros a ser definido antes da execuçcão da rotina\n\nPara se criar GroupTypes e SpecTypes distintas, execute a rotina mais de uma vez alterando estes valores e criando outras variáveis correpondentes na planilha do excel.",
+        "DescriptionText": null,
+        "IsExpanded": true,
+        "WidthAdjustment": 0.0,
+        "HeightAdjustment": 0.0,
+        "Nodes": [],
+        "HasNestedGroups": false,
+        "Left": -1168.4210119147085,
+        "Top": -1216.1354430276251,
+        "Width": 0.0,
+        "Height": 0.0,
+        "FontSize": 36.0,
+        "GroupStyleId": "00000000-0000-0000-0000-000000000000",
+        "InitialTop": 0.0,
+        "InitialHeight": 0.0,
+        "TextblockHeight": 0.0,
+        "Background": "#FFC1D676"
+      },
+      {
+        "Id": "1cba2923d5104cfb92e4042a2c9e62fa",
+        "Title": "Esta rotina tem como objetivo criar parâmetros compartilhados que poderão serão utilizados especificamente na geração de relatórios quantitativos a serem preenchidos a partir da execução de rotinas Dynamo levando-se em cosideração os seus nomes específicos.\n\nSe fossem usados parâmetros já existentes nos templates, os relatórios precisariam ser gerados um de cada vez em sequência pois sobrescreveriam os dados destes campos após a execução das rotinas.\n\nPara evitar esta sobrescrita e desconfiguração dos modelos de tabelas de quantitativos, usa-se este artificio de parâmetros extras.\n\nComo vários projetos poderão se valer destes modelos de tabelas de quantitativos e das rotinas Dynamo desenvolvidas, é mais fãcil criar os parâmetros adicionais como externos e de maneira compartilhada definindo-os em uma planilha do Excel e executando a sua criação de maneira automatizada através desta rotina.\n\nNovos parâmetros podem ser adicionados na planilha, de acordo com a necessidade do projeto.\n\nPara tidos de dados distintos, como texto, numero, volume, url, etc crie planilhas diferentes e, ao importar defina os seus tipos correspondentes, um de cada vez e em plailhas distintas com os seu respectivos nomes de parâmetro. Evite criar nomes iguais de planilhas em mais de um arquivo do excel. Acrescente um prefixo especifico em cada um deles, de acordo com o seu tipo, antes de seu nome, para evitar confusões ao usá-los nos projetos.",
+        "DescriptionText": null,
+        "IsExpanded": true,
+        "WidthAdjustment": 0.0,
+        "HeightAdjustment": 0.0,
+        "Nodes": [],
+        "HasNestedGroups": false,
+        "Left": -1491.1221158197784,
+        "Top": -1215.2745181788853,
+        "Width": 0.0,
+        "Height": 0.0,
+        "FontSize": 36.0,
+        "GroupStyleId": "00000000-0000-0000-0000-000000000000",
+        "InitialTop": 0.0,
+        "InitialHeight": 0.0,
+        "TextblockHeight": 0.0,
+        "Background": "#FFC1D676"
+      },
+      {
+        "Id": "0cd2eaa2a925425f94da9fc899aeb5a0",
+        "Title": "Decide se usa GroupName Definido pelo usuário na rotina do Dynamo ou se usa o nome específico obtido de cada parâmetro da planilha do Excel ",
+        "DescriptionText": null,
+        "IsExpanded": true,
+        "WidthAdjustment": 0.0,
+        "HeightAdjustment": 0.0,
+        "Nodes": [],
+        "HasNestedGroups": false,
+        "Left": 1408.7488184563292,
+        "Top": 666.31192405552213,
+        "Width": 0.0,
+        "Height": 0.0,
+        "FontSize": 36.0,
+        "GroupStyleId": "00000000-0000-0000-0000-000000000000",
+        "InitialTop": 0.0,
+        "InitialHeight": 0.0,
+        "TextblockHeight": 0.0,
+        "Background": "#FFC1D676",
+        "PinnedNode": "8eee3eaf82724fd48303934567cefc90"
+      },
+      {
+        "Id": "13f8b8956e4d4507810dafa6b82aa1cc",
+        "Title": "É Necessário criar um arquivo de parâmetros compartilhados no Revit antes da criação dos mesmos :\n\n•  Abra o Revit e um projeto qualquer\n•  Selecione o menu Gerenciar => Parâmetros compartilhados\n•  Clique no botâo \"Criar\" da tela  \"Editar parâmetros copmpartilhados\" e escolha um local de acesso comum ou compartilhado para que o mesmo possa ser acessivel de qualquer lugar pelo projeto\n•   Defina o nome do arquivo compartilhado \n    (Ex: Parametros.txt) \n\n\nÉ necessário criar uma planilha do Excel com as colunas especificas do modelo : \n•  SharedParameters.xlsx\n\nCriar, lina a linha, as informações dos parâmetros compartilhados desejados.\n\nExecutar a rotina",
+        "DescriptionText": null,
+        "IsExpanded": true,
+        "WidthAdjustment": 0.0,
+        "HeightAdjustment": 0.0,
+        "Nodes": [],
+        "HasNestedGroups": false,
+        "Left": -845.17223341186843,
+        "Top": -1213.8944650458852,
+        "Width": 0.0,
+        "Height": 0.0,
+        "FontSize": 36.0,
+        "GroupStyleId": "00000000-0000-0000-0000-000000000000",
+        "InitialTop": 0.0,
+        "InitialHeight": 0.0,
+        "TextblockHeight": 0.0,
+        "Background": "#FFC1D676"
+      },
+      {
+        "Id": "498c1a5ab0dd4b22a69449873e8dd4d4",
+        "Title": "Processa e extrai os dados recebidos do Excel ",
+        "DescriptionText": null,
+        "IsExpanded": true,
+        "WidthAdjustment": 0.0,
+        "HeightAdjustment": 0.0,
+        "Nodes": [],
+        "HasNestedGroups": false,
+        "Left": -159.42487444077994,
+        "Top": 22.025931107201984,
+        "Width": 0.0,
+        "Height": 0.0,
+        "FontSize": 36.0,
+        "GroupStyleId": "00000000-0000-0000-0000-000000000000",
+        "InitialTop": 0.0,
+        "InitialHeight": 0.0,
+        "TextblockHeight": 0.0,
+        "Background": "#FFC1D676",
+        "PinnedNode": "94fbc5e825964cdbad5a9790a49657d6"
+      }
+    ],
+    "X": 299.59074833302572,
+    "Y": 256.44271925791475,
+    "Zoom": 0.18485949652182321
+  }
+}
